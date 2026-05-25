@@ -1,0 +1,104 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "crates": "https://crates.io/api/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "Crate": {
+      "@id": "crates:Crate",
+      "@context": {
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "description": { "@id": "schema:description", "@type": "xsd:string" },
+        "max_version": { "@id": "crates:Crate/maxVersion", "@type": "xsd:string" },
+        "max_stable_version": { "@id": "crates:Crate/maxStableVersion", "@type": "xsd:string" },
+        "newest_version": { "@id": "crates:Crate/newestVersion", "@type": "xsd:string" },
+        "downloads": { "@id": "crates:Crate/downloads", "@type": "xsd:integer" },
+        "recent_downloads": { "@id": "crates:Crate/recentDownloads", "@type": "xsd:integer" },
+        "repository": { "@id": "schema:codeRepository", "@type": "xsd:anyURI" },
+        "documentation": { "@id": "schema:documentation", "@type": "xsd:anyURI" },
+        "homepage": { "@id": "schema:url", "@type": "xsd:anyURI" },
+        "keywords": { "@id": "schema:keywords", "@container": "@list" },
+        "categories": { "@id": "schema:about", "@container": "@list" },
+        "created_at": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+        "updated_at": { "@id": "schema:dateModified", "@type": "xsd:dateTime" }
+      }
+    },
+    "Version": {
+      "@id": "crates:Version",
+      "@context": {
+        "crate": { "@id": "crates:Version/crate", "@type": "xsd:string" },
+        "num": { "@id": "schema:softwareVersion", "@type": "xsd:string" },
+        "dl_path": { "@id": "crates:Version/downloadPath", "@type": "xsd:string" },
+        "downloads": { "@id": "crates:Version/downloads", "@type": "xsd:integer" },
+        "features": { "@id": "crates:Version/features" },
+        "yanked": { "@id": "crates:Version/yanked", "@type": "xsd:boolean" },
+        "license": { "@id": "spdx:licenseId", "@type": "xsd:string" },
+        "rust_version": { "@id": "crates:Version/rustVersion", "@type": "xsd:string" },
+        "crate_size": { "@id": "schema:fileSize", "@type": "xsd:integer" },
+        "checksum": { "@id": "crates:Version/checksum", "@type": "xsd:string" },
+        "created_at": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+        "updated_at": { "@id": "schema:dateModified", "@type": "xsd:dateTime" }
+      }
+    },
+    "Dependency": {
+      "@id": "crates:Dependency",
+      "@context": {
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "req": { "@id": "crates:Dependency/req", "@type": "xsd:string" },
+        "features": { "@id": "crates:Dependency/features", "@container": "@list" },
+        "optional": { "@id": "crates:Dependency/optional", "@type": "xsd:boolean" },
+        "default_features": { "@id": "crates:Dependency/defaultFeatures", "@type": "xsd:boolean" },
+        "target": { "@id": "crates:Dependency/target", "@type": "xsd:string" },
+        "kind": { "@id": "crates:Dependency/kind", "@type": "xsd:string" },
+        "registry": { "@id": "crates:Dependency/registry", "@type": "xsd:string" },
+        "package": { "@id": "crates:Dependency/package", "@type": "xsd:string" }
+      }
+    },
+    "Owner": {
+      "@id": "crates:Owner",
+      "@context": {
+        "id": { "@id": "crates:Owner/id", "@type": "xsd:integer" },
+        "login": { "@id": "schema:identifier", "@type": "xsd:string" },
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "kind": { "@id": "crates:Owner/kind", "@type": "xsd:string" },
+        "avatar": { "@id": "schema:image", "@type": "xsd:anyURI" },
+        "url": { "@id": "schema:url", "@type": "xsd:anyURI" }
+      }
+    },
+    "Keyword": {
+      "@id": "crates:Keyword",
+      "@context": {
+        "keyword": { "@id": "schema:keywords", "@type": "xsd:string" },
+        "crates_cnt": { "@id": "crates:Keyword/cratesCount", "@type": "xsd:integer" },
+        "created_at": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" }
+      }
+    },
+    "Category": {
+      "@id": "crates:Category",
+      "@context": {
+        "category": { "@id": "schema:name", "@type": "xsd:string" },
+        "slug": { "@id": "crates:Category/slug", "@type": "xsd:string" },
+        "description": { "@id": "schema:description", "@type": "xsd:string" },
+        "crates_cnt": { "@id": "crates:Category/cratesCount", "@type": "xsd:integer" },
+        "created_at": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" }
+      }
+    },
+    "RegistryConfig": {
+      "@id": "crates:RegistryConfig",
+      "@context": {
+        "dl": { "@id": "crates:RegistryConfig/dl", "@type": "xsd:anyURI" },
+        "api": { "@id": "crates:RegistryConfig/api", "@type": "xsd:anyURI" },
+        "auth-required": { "@id": "crates:RegistryConfig/authRequired", "@type": "xsd:boolean" }
+      }
+    },
+    "ErrorResponse": {
+      "@id": "crates:ErrorResponse",
+      "@context": {
+        "errors": { "@id": "crates:ErrorResponse/errors", "@container": "@list" }
+      }
+    }
+  }
+}

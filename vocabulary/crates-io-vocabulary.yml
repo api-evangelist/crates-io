@@ -1,0 +1,47 @@
+name: crates.io Vocabulary
+description: >
+  Domain vocabulary for the crates.io Rust package registry covering the
+  Web API surface, the sparse index protocol, and Cargo registry concepts.
+created: '2026-05-25'
+modified: '2026-05-25'
+terms:
+  - term: Crate
+    definition: A package of Rust source code published to a registry. Identified by a unique name across crates.io.
+  - term: Version
+    definition: A semver-tagged release of a crate. Each crate may have many versions, each with its own dependencies, features, and tarball.
+  - term: Yank
+    definition: Marking a published version as unsuitable for selection by new lockfile resolutions. Existing Cargo.lock files continue to resolve a yanked version.
+  - term: Unyank
+    definition: Restoring a previously yanked version so it becomes selectable again by new resolutions.
+  - term: Owner
+    definition: A user or team with publish, yank, and owner-management rights for a crate. Teams are identified as github:org:team.
+  - term: Index
+    definition: The metadata catalog for the registry. Each crate has one append-only file listing every published version, its dependencies, features, checksum, and yank state.
+  - term: Sparse Index
+    definition: HTTP-served per-crate index files at index.crates.io, replacing the legacy git index clone. Default for Cargo since Rust 1.70 (June 2023).
+  - term: Git Index
+    definition: The legacy index stored at github.com/rust-lang/crates.io-index. Still mirrored but no longer the default fetch protocol.
+  - term: config.json
+    definition: The root document of the sparse index that declares the download URL template, web API base URL, and authentication requirements.
+  - term: Tarball / .crate file
+    definition: The gzipped tar archive of a crate version, addressable via /api/v1/crates/{crate}/{version}/download or the dl template from config.json.
+  - term: Checksum
+    definition: SHA-256 of the .crate tarball, published in the index entry as the cksum field for tamper detection.
+  - term: Feature
+    definition: A named conditional compilation flag on a crate that opts in to extra functionality or dependencies.
+  - term: MSRV
+    definition: Minimum Supported Rust Version. Surfaced as rust_version on the crate version and in the index entry.
+  - term: Cargo
+    definition: The Rust language's build system and package manager that consumes crates.io and other registries.
+  - term: Alternate Registry
+    definition: A non-crates.io registry that implements the same index protocol and Web API. Configured via .cargo/config.toml.
+  - term: Token
+    definition: A user-scoped credential created at https://crates.io/settings/tokens and sent in the Authorization header to publish, yank, or manage owners.
+  - term: Trusted Publishing
+    definition: OIDC-based publishing flow that exchanges a GitHub Actions OIDC token for a short-lived crates.io publish token via crates-io-auth-action.
+  - term: Reverse Dependencies
+    definition: The list of crates that depend on a given crate. Surfaced on the crates.io website.
+  - term: docs.rs
+    definition: Companion service that auto-builds and hosts documentation for every published crate version.
+  - term: Crates.io Team
+    definition: The Rust project team that operates crates.io, supported by the Rust Foundation, AWS, and Fastly.

@@ -1,0 +1,119 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: crates.io Sparse Index — Index
+  description: 'crates.io Sparse Index — Index. Self-contained Naftiko capability covering the sparse index configuration and per-crate index lookups served from index.crates.io.'
+  tags:
+  - Cratesio
+  - Index
+  - Sparse
+  - Rust
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds: []
+capability:
+  consumes:
+  - type: http
+    namespace: crates-index
+    baseUri: https://index.crates.io
+    description: crates.io Sparse Index business capability.
+    resources:
+    - name: config-json
+      path: /config.json
+      operations:
+      - name: getregistryconfig
+        method: GET
+        description: Get Registry Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+    - name: index-long
+      path: /{first_two}/{second_two}/{crate}
+      operations:
+      - name: getindexlong
+        method: GET
+        description: Get Index For Four-Plus-Character Crate
+        outputRawFormat: text
+        outputParameters:
+        - name: result
+          type: string
+          value: $.
+        inputParameters:
+        - name: first_two
+          in: path
+          type: string
+          required: true
+        - name: second_two
+          in: path
+          type: string
+          required: true
+        - name: crate
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: none
+  exposes:
+  - type: rest
+    namespace: crates-index-rest
+    port: 8080
+    description: REST adapter for the crates.io sparse index.
+    resources:
+    - path: /v1/config.json
+      name: registry-config
+      description: REST surface for the registry config document.
+      operations:
+      - method: GET
+        name: getregistryconfig
+        description: Get Registry Configuration
+        call: crates-index.getregistryconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/index/{first_two}/{second_two}/{crate}
+      name: index-long
+      description: REST surface for per-crate index lookups (4+ chars).
+      operations:
+      - method: GET
+        name: getindexlong
+        description: Get Index For Four-Plus-Character Crate
+        call: crates-index.getindexlong
+        with:
+          first_two: rest.path.first_two
+          second_two: rest.path.second_two
+          crate: rest.path.crate
+        outputParameters:
+        - type: string
+          mapping: $.
+  - type: mcp
+    namespace: crates-index-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for the crates.io sparse index.
+    tools:
+    - name: crates-index-config
+      description: Get Registry Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crates-index.getregistryconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: crates-index-lookup
+      description: Get Index For Four-Plus-Character Crate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crates-index.getindexlong
+      with:
+        first_two: tools.first_two
+        second_two: tools.second_two
+        crate: tools.crate
+      outputParameters:
+      - type: string
+        mapping: $.

@@ -1,0 +1,52 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://crates.io/api/v1/crates/tokio",
+    "headers": {
+      "User-Agent": "api-evangelist (kin@apievangelist.com)",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "crate": {
+      "id": "tokio",
+      "name": "tokio",
+      "description": "An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications.",
+      "max_version": "1.45.0",
+      "max_stable_version": "1.45.0",
+      "newest_version": "1.45.0",
+      "downloads": 350000000,
+      "recent_downloads": 28000000,
+      "repository": "https://github.com/tokio-rs/tokio",
+      "documentation": "https://docs.rs/tokio",
+      "homepage": "https://tokio.rs",
+      "keywords": ["io", "async", "non-blocking", "futures"],
+      "categories": ["asynchronous", "network-programming"],
+      "created_at": "2017-04-21T15:32:21.183Z",
+      "updated_at": "2026-05-15T10:42:11.998Z"
+    },
+    "versions": [
+      {
+        "id": 1234567,
+        "crate": "tokio",
+        "num": "1.45.0",
+        "dl_path": "/api/v1/crates/tokio/1.45.0/download",
+        "downloads": 1200000,
+        "features": {
+          "full": ["fs", "io-util", "macros", "net", "process", "rt", "rt-multi-thread", "signal", "sync", "time"]
+        },
+        "yanked": false,
+        "license": "MIT",
+        "rust_version": "1.70",
+        "crate_size": 802345,
+        "created_at": "2026-05-15T10:42:11.998Z"
+      }
+    ],
+    "keywords": [
+      { "id": "async", "keyword": "async", "crates_cnt": 4321 }
+    ],
+    "categories": [
+      { "id": "asynchronous", "category": "Asynchronous", "slug": "asynchronous", "crates_cnt": 5210 }
+    ]
+  }
+}

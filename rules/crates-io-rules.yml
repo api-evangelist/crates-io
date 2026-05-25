@@ -1,0 +1,50 @@
+extends:
+  - spectral:oas
+
+rules:
+  # crates.io conventions enforced across both the Web API and Sparse Index specs
+  oas3-api-servers:
+    description: All OpenAPI specs must declare at least one server.
+    severity: error
+
+  operation-tag-defined:
+    description: Every operation must use a defined tag (Crates, Versions, Owners, Index, Config).
+    severity: warn
+
+  crates-io-snake-case-fields:
+    description: Response fields use snake_case as established by the crates.io Web API (e.g. max_version, recent_downloads).
+    severity: hint
+    given: "$.components.schemas..properties.*~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  crates-io-title-case-summaries:
+    description: Operation summaries use Title Case.
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z0-9]*)( [A-Z0-9][a-zA-Z0-9]*)*$"
+
+  crates-io-error-envelope:
+    description: Error responses should reference the ErrorResponse schema with an errors[].detail envelope.
+    severity: hint
+    given: "$.paths[*][*].responses[?(@property >= '400')].content.application/json.schema.$ref"
+    then:
+      function: pattern
+      functionOptions:
+        match: "ErrorResponse"
+
+  crates-io-auth-header:
+    description: Mutating Web API operations require the Authorization header (raw token, no Bearer prefix).
+    severity: info
+
+  crates-io-versioned-path:
+    description: Web API paths are prefixed with /api/v1.
+    severity: warn
+    given: "$.paths"
+    then:
+      function: truthy

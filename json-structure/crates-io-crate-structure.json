@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-structure.org/schema",
+  "$id": "https://api-evangelist.com/structures/crates-io/crates-io-crate-structure.json",
+  "title": "crates.io Crate Structure",
+  "description": "Logical structure of the core crates.io resources and their relationships. Companion to crates-io-crate-schema.json (validation) and crates-io-context.jsonld (semantics).",
+  "entities": {
+    "Crate": {
+      "identifiers": ["name"],
+      "fields": [
+        "name", "description", "max_version", "max_stable_version", "newest_version",
+        "downloads", "recent_downloads", "repository", "documentation", "homepage",
+        "created_at", "updated_at"
+      ],
+      "relations": {
+        "has_versions": { "target": "Version", "cardinality": "1..*" },
+        "owned_by": { "target": "Owner", "cardinality": "1..*" },
+        "tagged_with": { "target": "Keyword", "cardinality": "0..*" },
+        "categorized_as": { "target": "Category", "cardinality": "0..*" }
+      }
+    },
+    "Version": {
+      "identifiers": ["crate", "num"],
+      "fields": [
+        "num", "downloads", "features", "yanked", "license", "rust_version",
+        "crate_size", "checksum", "created_at", "updated_at", "dl_path"
+      ],
+      "relations": {
+        "belongs_to": { "target": "Crate", "cardinality": "1" },
+        "depends_on": { "target": "Dependency", "cardinality": "0..*" }
+      }
+    },
+    "Dependency": {
+      "identifiers": ["name", "req"],
+      "fields": ["name", "req", "features", "optional", "default_features", "target", "kind", "registry", "package"]
+    },
+    "Owner": {
+      "identifiers": ["login"],
+      "fields": ["id", "login", "name", "kind", "avatar", "url"]
+    },
+    "Keyword": {
+      "identifiers": ["keyword"],
+      "fields": ["keyword", "crates_cnt", "created_at"]
+    },
+    "Category": {
+      "identifiers": ["slug"],
+      "fields": ["category", "slug", "description", "crates_cnt", "created_at"]
+    },
+    "RegistryConfig": {
+      "identifiers": ["api"],
+      "fields": ["dl", "api", "auth-required"]
+    }
+  }
+}

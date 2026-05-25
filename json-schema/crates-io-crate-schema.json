@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/crates-io/crates-io-crate-schema.json",
+  "title": "crates.io Crate",
+  "description": "Schema for a crate document returned by the crates.io Web API. Mirrors the response of GET /api/v1/crates/{crate} including the embedded crate summary, version list, keywords, and categories.",
+  "type": "object",
+  "required": ["crate"],
+  "properties": {
+    "crate": { "$ref": "#/definitions/CrateSummary" },
+    "versions": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Version" }
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Keyword" }
+    },
+    "categories": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Category" }
+    }
+  },
+  "definitions": {
+    "CrateSummary": {
+      "type": "object",
+      "required": ["name", "max_version"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "description": "Canonical crate name." },
+        "description": { "type": "string" },
+        "max_version": { "type": "string", "description": "Highest published version (including pre-releases)." },
+        "max_stable_version": { "type": "string", "nullable": true },
+        "newest_version": { "type": "string" },
+        "downloads": { "type": "integer", "minimum": 0 },
+        "recent_downloads": { "type": "integer", "minimum": 0 },
+        "repository": { "type": "string", "format": "uri" },
+        "documentation": { "type": "string", "format": "uri" },
+        "homepage": { "type": "string", "format": "uri" },
+        "keywords": { "type": "array", "items": { "type": "string" } },
+        "categories": { "type": "array", "items": { "type": "string" } },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Version": {
+      "type": "object",
+      "required": ["num", "crate"],
+      "properties": {
+        "id": { "type": "integer" },
+        "crate": { "type": "string" },
+        "num": { "type": "string", "description": "Semver version string." },
+        "dl_path": { "type": "string", "description": "Relative download path for the .crate tarball." },
+        "readme_path": { "type": "string" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "downloads": { "type": "integer", "minimum": 0 },
+        "features": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "yanked": { "type": "boolean" },
+        "license": { "type": "string", "description": "SPDX-style license expression." },
+        "rust_version": { "type": "string", "nullable": true },
+        "crate_size": { "type": "integer", "nullable": true },
+        "checksum": { "type": "string", "description": "SHA-256 hex of the .crate file." }
+      }
+    },
+    "Keyword": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "keyword": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "crates_cnt": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "slug": { "type": "string" },
+        "description": { "type": "string" },
+        "crates_cnt": { "type": "integer", "minimum": 0 },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

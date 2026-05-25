@@ -1,0 +1,569 @@
+openapi: 3.1.0
+info:
+  title: crates.io Web API
+  description: >
+    The crates.io Registry Web API exposes endpoints used by Cargo and the
+    crates.io website for searching, publishing, yanking, and managing crate
+    ownership. The API is hosted at https://crates.io under the /api/v1
+    prefix and is the canonical implementation of the Cargo Registry Web API
+    specification.
+  version: v1
+  contact:
+    name: crates.io Team
+    email: help@crates.io
+    url: https://crates.io
+  license:
+    name: Cargo Documentation (MIT/Apache-2.0)
+    url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+
+servers:
+  - url: https://crates.io
+    description: crates.io Production
+
+security:
+  - ApiTokenAuth: []
+
+tags:
+  - name: Crates
+    description: Search and manage Rust crates
+  - name: Versions
+    description: Yank and unyank crate versions
+  - name: Owners
+    description: List, add, and remove crate owners
+
+paths:
+  /api/v1/crates:
+    get:
+      summary: Search Crates
+      description: >
+        Search the crates.io registry for crates by query string. Returns a
+        paginated list of matching crates with summary metadata. No
+        authentication required.
+      operationId: searchCrates
+      tags:
+        - Crates
+      security: []
+      parameters:
+        - name: q
+          in: query
+          description: The search query string.
+          required: false
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          description: Number of results per page (1-100, default 10).
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: page
+          in: query
+          description: Page number to return.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: sort
+          in: query
+          description: Sort order (alpha, downloads, recent-downloads, recent-updates, new).
+          required: false
+          schema:
+            type: string
+            enum:
+              - alpha
+              - downloads
+              - recent-downloads
+              - recent-updates
+              - new
+      responses:
+        '200':
+          description: A paginated list of crates matching the query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrateSearchResponse'
+        '400':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/new:
+    put:
+      summary: Publish A New Crate Version
+      description: >
+        Publish a new crate or crate version. The request body is a binary
+        envelope containing a 32-bit little-endian length, the JSON metadata,
+        a 32-bit little-endian length, and the .crate tarball.
+      operationId: publishCrate
+      tags:
+        - Crates
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+              description: 32-bit LE metadata length, JSON metadata, 32-bit LE crate length, crate tarball.
+      responses:
+        '200':
+          description: The crate was published successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+        '422':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}:
+    get:
+      summary: Get Crate Details
+      description: Retrieve full metadata for a single crate including versions, owners, and keywords.
+      operationId: getCrate
+      tags:
+        - Crates
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/CrateName'
+      responses:
+        '200':
+          description: Crate detail document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrateDetailResponse'
+        '404':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}/{version}:
+    get:
+      summary: Get Crate Version
+      description: Retrieve metadata for a specific version of a crate.
+      operationId: getCrateVersion
+      tags:
+        - Versions
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/CrateName'
+        - $ref: '#/components/parameters/Version'
+      responses:
+        '200':
+          description: Version metadata document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionDetailResponse'
+        '404':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}/{version}/download:
+    get:
+      summary: Download Crate Tarball
+      description: >
+        Returns a redirect to the .crate tarball stored in the crates.io S3
+        bucket. This is the canonical download URL used by Cargo.
+      operationId: downloadCrate
+      tags:
+        - Versions
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/CrateName'
+        - $ref: '#/components/parameters/Version'
+      responses:
+        '302':
+          description: Redirect to the gzipped tar archive of the crate version.
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+        '404':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}/{version}/yank:
+    delete:
+      summary: Yank A Crate Version
+      description: >
+        Mark a specific crate version as yanked so that it is no longer
+        selected as a fresh dependency. Existing Cargo.lock files continue
+        to resolve against yanked versions.
+      operationId: yankVersion
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/CrateName'
+        - $ref: '#/components/parameters/Version'
+      responses:
+        '200':
+          description: Yank successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}/{version}/unyank:
+    put:
+      summary: Unyank A Crate Version
+      description: Restore a previously yanked version of a crate.
+      operationId: unyankVersion
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/CrateName'
+        - $ref: '#/components/parameters/Version'
+      responses:
+        '200':
+          description: Unyank successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}/owners:
+    get:
+      summary: List Crate Owners
+      description: Returns the list of users and teams that own a crate.
+      operationId: listOwners
+      tags:
+        - Owners
+      parameters:
+        - $ref: '#/components/parameters/CrateName'
+      responses:
+        '200':
+          description: Owner list document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnersResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+    put:
+      summary: Add Crate Owner
+      description: Invite a user or team as an owner of the crate.
+      operationId: addOwner
+      tags:
+        - Owners
+      parameters:
+        - $ref: '#/components/parameters/CrateName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnersChange'
+      responses:
+        '200':
+          description: Owner invitation issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkMessageResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+    delete:
+      summary: Remove Crate Owner
+      description: Remove a user or team from the owners of the crate.
+      operationId: removeOwner
+      tags:
+        - Owners
+      parameters:
+        - $ref: '#/components/parameters/CrateName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnersChange'
+      responses:
+        '200':
+          description: Owner removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkMessageResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+
+components:
+  securitySchemes:
+    ApiTokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >
+        A crates.io API token created at https://crates.io/settings/tokens. The
+        raw token is sent in the Authorization header without a Bearer prefix.
+  parameters:
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
+    Version:
+      name: version
+      in: path
+      required: true
+      description: The semver version of the crate (e.g. 1.0.0).
+      schema:
+        type: string
+  responses:
+    Error:
+      description: Error envelope returned by the crates.io API.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    CrateSearchResponse:
+      type: object
+      required:
+        - crates
+        - meta
+      properties:
+        crates:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrateSummary'
+        meta:
+          $ref: '#/components/schemas/SearchMeta'
+    CrateSummary:
+      type: object
+      required:
+        - name
+        - max_version
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        max_version:
+          type: string
+        max_stable_version:
+          type: string
+        newest_version:
+          type: string
+        downloads:
+          type: integer
+        recent_downloads:
+          type: integer
+        repository:
+          type: string
+        documentation:
+          type: string
+        homepage:
+          type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        categories:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    SearchMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        next_page:
+          type: string
+          nullable: true
+        prev_page:
+          type: string
+          nullable: true
+    CrateDetailResponse:
+      type: object
+      required:
+        - crate
+      properties:
+        crate:
+          $ref: '#/components/schemas/CrateSummary'
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Version'
+        keywords:
+          type: array
+          items:
+            $ref: '#/components/schemas/Keyword'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+    Version:
+      type: object
+      required:
+        - num
+        - crate
+      properties:
+        id:
+          type: integer
+        crate:
+          type: string
+        num:
+          type: string
+        dl_path:
+          type: string
+        readme_path:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        downloads:
+          type: integer
+        features:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        yanked:
+          type: boolean
+        license:
+          type: string
+        rust_version:
+          type: string
+          nullable: true
+        crate_size:
+          type: integer
+          nullable: true
+    VersionDetailResponse:
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          $ref: '#/components/schemas/Version'
+    Keyword:
+      type: object
+      properties:
+        id:
+          type: string
+        keyword:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        crates_cnt:
+          type: integer
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        category:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        crates_cnt:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    OwnersResponse:
+      type: object
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/Owner'
+    Owner:
+      type: object
+      required:
+        - id
+        - login
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
+          enum:
+            - user
+            - team
+        avatar:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+    OwnersChange:
+      type: object
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            description: A GitHub login (user) or a github:org:team identifier (team).
+    OkResponse:
+      type: object
+      required:
+        - ok
+      properties:
+        ok:
+          type: boolean
+    OkMessageResponse:
+      type: object
+      required:
+        - ok
+      properties:
+        ok:
+          type: boolean
+        msg:
+          type: string
+    PublishResponse:
+      type: object
+      properties:
+        warnings:
+          type: object
+          properties:
+            invalid_categories:
+              type: array
+              items:
+                type: string
+            invalid_badges:
+              type: array
+              items:
+                type: string
+            other:
+              type: array
+              items:
+                type: string
+    ErrorResponse:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              detail:
+                type: string

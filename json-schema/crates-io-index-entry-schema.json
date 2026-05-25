@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/crates-io/crates-io-index-entry-schema.json",
+  "title": "crates.io Sparse Index Entry",
+  "description": "Schema for a single newline-delimited JSON record returned by the crates.io sparse index. One record per published version of a crate.",
+  "type": "object",
+  "required": ["name", "vers", "deps", "cksum", "features", "yanked"],
+  "properties": {
+    "name": { "type": "string", "description": "Crate name." },
+    "vers": { "type": "string", "description": "Semver version string." },
+    "deps": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Dependency" }
+    },
+    "cksum": {
+      "type": "string",
+      "description": "SHA-256 of the .crate tarball, lowercase hex.",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "features2": {
+      "type": "object",
+      "description": "Second feature map introduced with index v2 for namespaced and weak-dep features.",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "yanked": { "type": "boolean" },
+    "links": { "type": "string", "nullable": true },
+    "v": { "type": "integer", "description": "Index format version, currently 1 or 2." },
+    "rust_version": { "type": "string", "nullable": true, "description": "MSRV declared in Cargo.toml." }
+  },
+  "definitions": {
+    "Dependency": {
+      "type": "object",
+      "required": ["name", "req"],
+      "properties": {
+        "name": { "type": "string" },
+        "req": { "type": "string", "description": "Semver requirement." },
+        "features": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "optional": { "type": "boolean" },
+        "default_features": { "type": "boolean" },
+        "target": { "type": "string", "nullable": true },
+        "kind": { "type": "string", "enum": ["normal", "build", "dev"] },
+        "registry": { "type": "string", "nullable": true },
+        "package": { "type": "string", "nullable": true }
+      }
+    }
+  }
+}

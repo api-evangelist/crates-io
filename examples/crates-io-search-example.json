@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://crates.io/api/v1/crates?q=serde&per_page=2&sort=downloads",
+    "headers": {
+      "User-Agent": "api-evangelist (kin@apievangelist.com)",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "crates": [
+      {
+        "id": "serde",
+        "name": "serde",
+        "description": "A generic serialization/deserialization framework",
+        "max_version": "1.0.219",
+        "max_stable_version": "1.0.219",
+        "newest_version": "1.0.219",
+        "downloads": 480000000,
+        "recent_downloads": 38000000,
+        "repository": "https://github.com/serde-rs/serde",
+        "documentation": "https://docs.rs/serde",
+        "homepage": "https://serde.rs",
+        "keywords": ["serde", "serialization", "no_std"],
+        "categories": ["encoding", "no-std"],
+        "created_at": "2014-12-05T20:20:39.487502Z",
+        "updated_at": "2026-04-12T11:02:18.123456Z"
+      },
+      {
+        "id": "serde_json",
+        "name": "serde_json",
+        "description": "A JSON serialization file format",
+        "max_version": "1.0.140",
+        "newest_version": "1.0.140",
+        "downloads": 410000000,
+        "recent_downloads": 33000000
+      }
+    ],
+    "meta": {
+      "total": 11900,
+      "next_page": "?q=serde&per_page=2&sort=downloads&page=2",
+      "prev_page": null
+    }
+  }
+}

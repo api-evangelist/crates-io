@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://index.crates.io/config.json",
+    "headers": {
+      "User-Agent": "cargo 1.82.0"
+    }
+  },
+  "response": {
+    "dl": "https://crates.io/api/v1/crates",
+    "api": "https://crates.io",
+    "auth-required": false
+  }
+}
