@@ -1,227 +1,224 @@
 aid: crates-io
 url: https://raw.githubusercontent.com/api-evangelist/crates-io/refs/heads/main/apis.yml
 apis:
-- aid: crates-io:crates-io-web-api
-  name: crates.io Web API
-  tags:
-  - Crates
-  - Package Registry
-  - Rust
-  - Search
-  - Publishing
-  humanURL: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
-  properties:
-  - url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
-    type: Documentation
-  - url: openapi/crates-io-web-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/crates-io-crate-schema.json
-    type: JSONSchema
-  - url: json-structure/crates-io-crate-structure.json
-    type: JSONStructure
-  - url: json-ld/crates-io-context.jsonld
-    type: JSONLD
-  - url: rules/crates-io-rules.yml
-    type: SpectralRules
-  - url: examples/crates-io-search-example.json
-    type: Example
-  - url: examples/crates-io-get-crate-example.json
-    type: Example
-  - type: NaftikoCapability
-    url: capabilities/web-api-crates.yaml
-  - type: NaftikoCapability
-    url: capabilities/web-api-versions.yaml
-  - type: NaftikoCapability
-    url: capabilities/web-api-owners.yaml
-  description: >
-    The crates.io Web API exposes the endpoints used by Cargo and the crates.io
-    website to search the registry, fetch crate and version metadata, publish
-    new versions, yank and unyank versions, and manage crate ownership. Hosted
-    at https://crates.io/api/v1, it is the canonical implementation of the
-    Cargo Registry Web API specification documented in the Cargo book.
-- aid: crates-io:crates-io-sparse-index
-  name: crates.io Sparse Index
-  tags:
-  - Index
-  - Package Registry
-  - Rust
-  - Sparse Protocol
-  humanURL: https://doc.rust-lang.org/cargo/reference/registry-index.html
-  properties:
-  - url: https://doc.rust-lang.org/cargo/reference/registry-index.html
-    type: Documentation
-  - url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
-    type: Documentation
-    name: Sparse registry protocol stabilized in Rust 1.68
-  - url: openapi/crates-io-sparse-index-openapi.yml
-    type: OpenAPI
-  - url: json-schema/crates-io-index-entry-schema.json
-    type: JSONSchema
-  - url: examples/crates-io-config-example.json
-    type: Example
-  - url: examples/crates-io-sparse-index-example.json
-    type: Example
-  - type: NaftikoCapability
-    url: capabilities/sparse-index.yaml
-  description: >
-    The crates.io sparse index at https://index.crates.io serves the registry
-    config document plus per-crate newline-delimited JSON metadata files
-    over HTTP, replacing the legacy git index clone. Cargo uses the sparse
-    protocol by default since Rust 1.70 (June 2023). Each index entry records
-    a version's dependencies, features, SHA-256 checksum, and yank state.
+  - aid: crates-io:crates-io-web-api
+    name: crates.io Web API
+    tags:
+      - Crates
+      - Package Registry
+      - Rust
+      - Search
+      - Publishing
+    humanURL: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+    properties:
+      - url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+        type: Documentation
+      - url: openapi/crates-io-web-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/crates-io-crate-schema.json
+        type: JSONSchema
+      - url: json-structure/crates-io-crate-structure.json
+        type: JSONStructure
+      - url: json-ld/crates-io-context.jsonld
+        type: JSONLD
+      - url: rules/crates-io-rules.yml
+        type: SpectralRules
+      - url: examples/crates-io-search-example.json
+        type: Example
+      - url: examples/crates-io-get-crate-example.json
+        type: Example
+    description: >
+      The crates.io Web API exposes the endpoints used by Cargo and the crates.io website to search the registry, fetch
+      crate and version metadata, publish new versions, yank and unyank versions, and manage crate ownership. Hosted at
+      https://crates.io/api/v1, it is the canonical implementation of the Cargo Registry Web API specification
+      documented in the Cargo book.
+  - aid: crates-io:crates-io-sparse-index
+    name: crates.io Sparse Index
+    tags:
+      - Index
+      - Package Registry
+      - Rust
+      - Sparse Protocol
+    humanURL: https://doc.rust-lang.org/cargo/reference/registry-index.html
+    properties:
+      - url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+        type: Documentation
+      - url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
+        type: Documentation
+        name: Sparse registry protocol stabilized in Rust 1.68
+      - url: openapi/crates-io-sparse-index-openapi.yml
+        type: OpenAPI
+      - url: json-schema/crates-io-index-entry-schema.json
+        type: JSONSchema
+      - url: examples/crates-io-config-example.json
+        type: Example
+      - url: examples/crates-io-sparse-index-example.json
+        type: Example
+    description: >
+      The crates.io sparse index at https://index.crates.io serves the registry config document plus per-crate
+      newline-delimited JSON metadata files over HTTP, replacing the legacy git index clone. Cargo uses the sparse
+      protocol by default since Rust 1.70 (June 2023). Each index entry records a version's dependencies, features,
+      SHA-256 checksum, and yank state.
 name: crates.io
 tags:
-- Rust
-- Package Registry
-- Crates
-- Cargo
-- Open Source
-- Developer Tools
-- Rust Foundation
+  - Rust
+  - Package Registry
+  - Crates
+  - Cargo
+  - Open Source
+  - Developer Tools
+  - Rust Foundation
 kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
-- url: https://crates.io
-  name: crates.io
-  type: Portal
-- url: https://doc.rust-lang.org/cargo/
-  name: The Cargo Book
-  type: Documentation
-- url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
-  name: Registry Web API Reference
-  type: Documentation
-- url: https://doc.rust-lang.org/cargo/reference/registry-index.html
-  name: Registry Index (Sparse + Git) Reference
-  type: Documentation
-- url: https://doc.rust-lang.org/cargo/reference/registries.html
-  name: Cargo Registries Overview
-  type: Documentation
-- url: https://doc.rust-lang.org/cargo/reference/registry-authentication.html
-  name: Registry Authentication
-  type: Documentation
-- url: https://doc.rust-lang.org/cargo/reference/publishing.html
-  name: Publishing on crates.io
-  type: GettingStarted
-- url: https://github.com/rust-lang/crates.io
-  name: rust-lang/crates.io Source Code
-  type: GitHubOrganization
-- url: https://github.com/rust-lang/crates.io-index
-  name: rust-lang/crates.io-index (legacy git index)
-  type: SourceCode
-- url: https://github.com/rust-lang/crates.io-index-archive
-  name: crates.io-index Archive
-  type: SourceCode
-- url: https://github.com/rust-lang/cargo
-  name: rust-lang/cargo
-  type: SourceCode
-- url: https://github.com/rust-lang/crates-io-auth-action
-  name: crates-io-auth-action (Trusted Publishing)
-  type: Tool
-- url: https://github.com/rust-lang/crates-io-cargo-teams
-  name: crates.io and Cargo Teams Home
-  type: GitHubOrganization
-- url: https://github.com/rust-lang/crates-io-ops-bot
-  name: crates-io-ops-bot
-  type: Tool
-- url: https://github.com/rust-lang/crates_io_og_image
-  name: crates.io OpenGraph image generator
-  type: Tool
-- url: https://github.com/rust-lang/crates-io-heroku-metrics
-  name: crates.io Heroku metrics collector
-  type: Tool
-- url: https://status.crates.io/
-  name: crates.io Status
-  type: StatusPage
-- url: https://blog.rust-lang.org/inside-rust/
-  name: Inside Rust Blog
-  type: Blog
-- url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
-  name: Rust 1.68 — Sparse registry protocol
-  type: ChangeLog
-- url: https://github.com/rust-lang/crates.io/blob/main/CONTRIBUTING.md
-  name: Contributing to crates.io
-  type: Documentation
-- url: https://github.com/rust-lang/crates.io/blob/main/SECURITY.md
-  name: Security Policy
-  type: SecurityPolicy
-- url: https://github.com/rust-lang/crates.io/blob/main/CODE_OF_CONDUCT.md
-  name: Code of Conduct
-  type: CodeOfConduct
-- url: https://github.com/rust-lang/crates.io/blob/main/LICENSE-APACHE
-  name: Apache 2.0 License
-  type: License
-- url: https://github.com/rust-lang/crates.io/blob/main/LICENSE-MIT
-  name: MIT License
-  type: License
-- url: mailto:help@crates.io
-  name: help@crates.io
-  type: Support
-- url: https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io
-  name: Zulip — #t-crates-io
-  type: Forum
-- url: https://github.com/rust-lang/crates.io/discussions
-  name: GitHub Discussions
-  type: Forum
-- url: https://crates.io/policies
-  name: Policies
-  type: Documentation
-- url: https://crates.io/data-access
-  name: Data Access
-  type: Documentation
-- url: https://docs.rs
-  name: docs.rs (companion documentation host)
-  type: Documentation
-- url: https://foundation.rust-lang.org/
-  name: Rust Foundation
-  type: Sponsor
-- url: https://aws.amazon.com/
-  name: Amazon Web Services (infrastructure)
-  type: Sponsor
-- url: https://www.fastly.com/
-  name: Fastly (CDN)
-  type: Sponsor
-- type: Features
-  data:
-  - Centralized package registry for the Rust programming language operated by the crates.io team under the Rust Foundation
-  - Web API at https://crates.io/api/v1 for search, crate detail, version detail, download redirect, publish, yank, unyank, and owner management
-  - Sparse HTTP index at https://index.crates.io (default for Cargo since Rust 1.70) — replaces the legacy git index for the vast majority of fetches
-  - Legacy git index at https://github.com/rust-lang/crates.io-index still mirrored for source replacement and offline scenarios
-  - SHA-256 checksums published per version for tamper-evident downloads
-  - Index format v2 with features2 map for namespaced and weak-dep features
-  - Per-crate keywords, categories, and reverse-dependency listings on the website
-  - Authentication via per-user API tokens scoped to publish, yank, and owner-management permissions
-  - Trusted Publishing flow via crates-io-auth-action exchanging GitHub Actions OIDC tokens for short-lived publish tokens
-  - Open source under Apache-2.0 and MIT — backend in Rust (axum + diesel), frontend in SvelteKit/TypeScript
-  - Infrastructure sponsored by Amazon Web Services (file hosting) and Fastly (CDN)
-  - Status page at status.crates.io reporting crates.io and docs.rs uptime
-  - Companion documentation host docs.rs auto-builds and serves docs for every published crate version
-  - No paid plans — operated as a public good of the Rust ecosystem
-  sources:
-  - https://crates.io
-  - https://github.com/rust-lang/crates.io
-  - https://doc.rust-lang.org/cargo/reference/registry-web-api.html
-  - https://doc.rust-lang.org/cargo/reference/registry-index.html
-  - https://doc.rust-lang.org/cargo/reference/registries.html
-  - https://status.crates.io/
-  updated: '2026-05-25'
+  - url: https://crates.io
+    name: crates.io
+    type: Portal
+  - url: https://doc.rust-lang.org/cargo/
+    name: The Cargo Book
+    type: Documentation
+  - url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+    name: Registry Web API Reference
+    type: Documentation
+  - url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+    name: Registry Index (Sparse + Git) Reference
+    type: Documentation
+  - url: https://doc.rust-lang.org/cargo/reference/registries.html
+    name: Cargo Registries Overview
+    type: Documentation
+  - url: https://doc.rust-lang.org/cargo/reference/registry-authentication.html
+    name: Registry Authentication
+    type: Documentation
+  - url: https://doc.rust-lang.org/cargo/reference/publishing.html
+    name: Publishing on crates.io
+    type: GettingStarted
+  - url: https://github.com/rust-lang/crates.io
+    name: rust-lang/crates.io Source Code
+    type: GitHubOrganization
+  - url: https://github.com/rust-lang/crates.io-index
+    name: rust-lang/crates.io-index (legacy git index)
+    type: SourceCode
+  - url: https://github.com/rust-lang/crates.io-index-archive
+    name: crates.io-index Archive
+    type: SourceCode
+  - url: https://github.com/rust-lang/cargo
+    name: rust-lang/cargo
+    type: SourceCode
+  - url: https://github.com/rust-lang/crates-io-auth-action
+    name: crates-io-auth-action (Trusted Publishing)
+    type: Tool
+  - url: https://github.com/rust-lang/crates-io-cargo-teams
+    name: crates.io and Cargo Teams Home
+    type: GitHubOrganization
+  - url: https://github.com/rust-lang/crates-io-ops-bot
+    name: crates-io-ops-bot
+    type: Tool
+  - url: https://github.com/rust-lang/crates_io_og_image
+    name: crates.io OpenGraph image generator
+    type: Tool
+  - url: https://github.com/rust-lang/crates-io-heroku-metrics
+    name: crates.io Heroku metrics collector
+    type: Tool
+  - url: https://status.crates.io/
+    name: crates.io Status
+    type: StatusPage
+  - url: https://blog.rust-lang.org/inside-rust/
+    name: Inside Rust Blog
+    type: Blog
+  - url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
+    name: Rust 1.68 — Sparse registry protocol
+    type: ChangeLog
+  - url: https://github.com/rust-lang/crates.io/blob/main/CONTRIBUTING.md
+    name: Contributing to crates.io
+    type: Documentation
+  - url: https://github.com/rust-lang/crates.io/blob/main/SECURITY.md
+    name: Security Policy
+    type: SecurityPolicy
+  - url: https://github.com/rust-lang/crates.io/blob/main/CODE_OF_CONDUCT.md
+    name: Code of Conduct
+    type: CodeOfConduct
+  - url: https://github.com/rust-lang/crates.io/blob/main/LICENSE-APACHE
+    name: Apache 2.0 License
+    type: License
+  - url: https://github.com/rust-lang/crates.io/blob/main/LICENSE-MIT
+    name: MIT License
+    type: License
+  - url: mailto:help@crates.io
+    name: help@crates.io
+    type: Support
+  - url: https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io
+    name: Zulip —
+    type: Forum
+  - url: https://github.com/rust-lang/crates.io/discussions
+    name: GitHub Discussions
+    type: Forum
+  - url: https://crates.io/policies
+    name: Policies
+    type: Documentation
+  - url: https://crates.io/data-access
+    name: Data Access
+    type: Documentation
+  - url: https://docs.rs
+    name: docs.rs (companion documentation host)
+    type: Documentation
+  - url: https://foundation.rust-lang.org/
+    name: Rust Foundation
+    type: Sponsor
+  - url: https://aws.amazon.com/
+    name: Amazon Web Services (infrastructure)
+    type: Sponsor
+  - url: https://www.fastly.com/
+    name: Fastly (CDN)
+    type: Sponsor
+  - type: Features
+    data:
+      - >-
+        Centralized package registry for the Rust programming language operated by the crates.io team under the Rust
+        Foundation
+      - >-
+        Web API at https://crates.io/api/v1 for search, crate detail, version detail, download redirect, publish, yank,
+        unyank, and owner management
+      - >-
+        Sparse HTTP index at https://index.crates.io (default for Cargo since Rust 1.70) — replaces the legacy git index
+        for the vast majority of fetches
+      - >-
+        Legacy git index at https://github.com/rust-lang/crates.io-index still mirrored for source replacement and
+        offline scenarios
+      - SHA-256 checksums published per version for tamper-evident downloads
+      - Index format v2 with features2 map for namespaced and weak-dep features
+      - Per-crate keywords, categories, and reverse-dependency listings on the website
+      - Authentication via per-user API tokens scoped to publish, yank, and owner-management permissions
+      - >-
+        Trusted Publishing flow via crates-io-auth-action exchanging GitHub Actions OIDC tokens for short-lived publish
+        tokens
+      - Open source under Apache-2.0 and MIT — backend in Rust (axum + diesel), frontend in SvelteKit/TypeScript
+      - Infrastructure sponsored by Amazon Web Services (file hosting) and Fastly (CDN)
+      - Status page at status.crates.io reporting crates.io and docs.rs uptime
+      - Companion documentation host docs.rs auto-builds and serves docs for every published crate version
+      - No paid plans — operated as a public good of the Rust ecosystem
+    sources:
+      - https://crates.io
+      - https://github.com/rust-lang/crates.io
+      - https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+      - https://doc.rust-lang.org/cargo/reference/registry-index.html
+      - https://doc.rust-lang.org/cargo/reference/registries.html
+      - https://status.crates.io/
+    updated: '2026-05-25'
 created: '2026-05-25T00:00:00.000Z'
 modified: '2026-05-25'
 position: Consuming
 description: >
-  crates.io is the official package registry for the Rust programming language,
-  operated by the crates.io team under the Rust Foundation with infrastructure
-  support from Amazon Web Services and Fastly. It exposes a Web API at
-  /api/v1 used by Cargo and the website for search, publishing, yanking, and
-  owner management, plus a sparse HTTP index at index.crates.io that has been
-  Cargo's default registry protocol since Rust 1.70 (June 2023). The legacy
-  git index is still mirrored. Every published version is checksummed with
-  SHA-256 and companion documentation is auto-built on docs.rs. The crates.io
-  source code is dual-licensed under Apache-2.0 and MIT and runs on Rust
-  (axum, diesel) with a SvelteKit frontend.
+  crates.io is the official package registry for the Rust programming language, operated by the crates.io team under the
+  Rust Foundation with infrastructure support from Amazon Web Services and Fastly. It exposes a Web API at /api/v1 used
+  by Cargo and the website for search, publishing, yanking, and owner management, plus a sparse HTTP index at
+  index.crates.io that has been Cargo's default registry protocol since Rust 1.70 (June 2023). The legacy git index is
+  still mirrored. Every published version is checksummed with SHA-256 and companion documentation is auto-built on
+  docs.rs. The crates.io source code is dual-licensed under Apache-2.0 and MIT and runs on Rust (axum, diesel) with a
+  SvelteKit frontend.
 maintainers:
-- FN: Kin Lane
-  email: info@apievangelist.com
-  X: apievangelist
-  url: https://apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com
+    X: apievangelist
+    url: https://apievangelist.com
 specificationVersion: '0.16'
