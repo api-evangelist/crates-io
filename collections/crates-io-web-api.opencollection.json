@@ -1,0 +1,274 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "crates.io Web API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Crates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Crates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://crates.io/api/v1/crates",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-100, default 10)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to return."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order (alpha, downloads, recent-downloads, recent-updates, new)."
+              }
+            ]
+          },
+          "docs": "Search the crates.io registry for crates by query string. Returns a paginated list of matching crates with summary metadata. No authentication required.\n"
+        },
+        {
+          "info": {
+            "name": "Publish A New Crate Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://crates.io/api/v1/crates/new"
+          },
+          "docs": "Publish a new crate or crate version. The request body is a binary envelope containing a 32-bit little-endian length, the JSON metadata, a 32-bit little-endian length, and the .crate tarball.\n"
+        },
+        {
+          "info": {
+            "name": "Get Crate Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://crates.io/api/v1/crates/:crate",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              }
+            ]
+          },
+          "docs": "Retrieve full metadata for a single crate including versions, owners, and keywords."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Crate Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://crates.io/api/v1/crates/:crate/:version",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The semver version of the crate (e.g. 1.0.0)."
+              }
+            ]
+          },
+          "docs": "Retrieve metadata for a specific version of a crate."
+        },
+        {
+          "info": {
+            "name": "Download Crate Tarball",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://crates.io/api/v1/crates/:crate/:version/download",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The semver version of the crate (e.g. 1.0.0)."
+              }
+            ]
+          },
+          "docs": "Returns a redirect to the .crate tarball stored in the crates.io S3 bucket. This is the canonical download URL used by Cargo.\n"
+        },
+        {
+          "info": {
+            "name": "Yank A Crate Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://crates.io/api/v1/crates/:crate/:version/yank",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The semver version of the crate (e.g. 1.0.0)."
+              }
+            ]
+          },
+          "docs": "Mark a specific crate version as yanked so that it is no longer selected as a fresh dependency. Existing Cargo.lock files continue to resolve against yanked versions.\n"
+        },
+        {
+          "info": {
+            "name": "Unyank A Crate Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://crates.io/api/v1/crates/:crate/:version/unyank",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The semver version of the crate (e.g. 1.0.0)."
+              }
+            ]
+          },
+          "docs": "Restore a previously yanked version of a crate."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Owners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Crate Owners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://crates.io/api/v1/crates/:crate/owners",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              }
+            ]
+          },
+          "docs": "Returns the list of users and teams that own a crate."
+        },
+        {
+          "info": {
+            "name": "Add Crate Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://crates.io/api/v1/crates/:crate/owners",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invite a user or team as an owner of the crate."
+        },
+        {
+          "info": {
+            "name": "Remove Crate Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://crates.io/api/v1/crates/:crate/owners",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a user or team from the owners of the crate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

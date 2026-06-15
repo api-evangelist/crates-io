@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "crates.io Sparse Index API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Registry Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/config.json"
+          },
+          "docs": "Returns the registry configuration document. Must be the first request a sparse-index client makes; controls download URL templates, publishing endpoint, and authentication requirements.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Index",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Index For One-Character Crate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/1/:crate",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the newline-delimited JSON index entries for a single-character crate name (e.g. /1/a)."
+        },
+        {
+          "info": {
+            "name": "Get Index For Two-Character Crate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/2/:crate",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the newline-delimited JSON index entries for a two-character crate name (e.g. /2/io)."
+        },
+        {
+          "info": {
+            "name": "Get Index For Three-Character Crate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/3/:first/:crate",
+            "params": [
+              {
+                "name": "first",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the newline-delimited JSON index entries for a three-character crate name. Path uses the first character as a directory (e.g. /3/r/rng)."
+        },
+        {
+          "info": {
+            "name": "Get Index For Four-Plus-Character Crate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/:first_two/:second_two/:crate",
+            "params": [
+              {
+                "name": "first_two",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "second_two",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the newline-delimited JSON index entries for a crate with four or more characters. Path uses the first two characters as the first directory and characters three and four as the second directory (e.g. /se/rd/serde for \"serde\", /to/ki/tokio for \"tokio\").\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

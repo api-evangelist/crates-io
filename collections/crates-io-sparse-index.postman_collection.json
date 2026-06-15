@@ -1,0 +1,861 @@
+{
+  "item": [
+    {
+      "id": "0c9c4e84-1373-4340-b9fb-633dc828e645",
+      "name": "Index",
+      "description": {
+        "content": "Per-crate index metadata files served over HTTP",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed4bb2be-c78f-4a3c-8c02-db282214add7",
+          "name": "Get Index For One-Character Crate",
+          "request": {
+            "name": "Get Index For One-Character Crate",
+            "description": {
+              "content": "Returns the newline-delimited JSON index entries for a single-character crate name (e.g. /1/a).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1",
+                ":crate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "crate",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "337a13d9-aa3a-4cf4-adb3-980d94398140",
+              "name": "Newline-delimited JSON index entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "52573f81-884c-42e9-b523-a236c6bf39b5",
+              "name": "Not modified (ETag/If-None-Match match).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4d0138cf-78fe-48fb-b38d-5a00fbac709e",
+              "name": "Crate not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d30fd554-1868-47de-803c-df2590625a4c",
+          "name": "Get Index For Two-Character Crate",
+          "request": {
+            "name": "Get Index For Two-Character Crate",
+            "description": {
+              "content": "Returns the newline-delimited JSON index entries for a two-character crate name (e.g. /2/io).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "2",
+                ":crate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "crate",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "453273e6-ea43-465e-b712-c016b302daf9",
+              "name": "Newline-delimited JSON index entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2092e4b7-ce14-419f-ad90-1fa31a345d75",
+              "name": "Not modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "572fb9fd-923a-4b41-a97e-6a2edba25964",
+              "name": "Crate not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "2",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9d7e801-a345-46f5-b931-85683e535e4a",
+          "name": "Get Index For Three-Character Crate",
+          "request": {
+            "name": "Get Index For Three-Character Crate",
+            "description": {
+              "content": "Returns the newline-delimited JSON index entries for a three-character crate name. Path uses the first character as a directory (e.g. /3/r/rng).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "3",
+                ":first",
+                ":crate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "first",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "crate",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b2d657a-67d2-4703-91e3-796d9bc125d8",
+              "name": "Newline-delimited JSON index entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3",
+                    ":first",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "first",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d931582a-9fd2-4f5a-b2b8-6163d0d2e3ef",
+              "name": "Not modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3",
+                    ":first",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "first",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6cc4a01-f382-4d58-93ae-d000105c8c2a",
+              "name": "Crate not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3",
+                    ":first",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "first",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70d85d54-40b0-4713-8821-1a4374e3c319",
+          "name": "Get Index For Four-Plus-Character Crate",
+          "request": {
+            "name": "Get Index For Four-Plus-Character Crate",
+            "description": {
+              "content": "Returns the newline-delimited JSON index entries for a crate with four or more characters. Path uses the first two characters as the first directory and characters three and four as the second directory (e.g. /se/rd/serde for \"serde\", /to/ki/tokio for \"tokio\").\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":first_two",
+                ":second_two",
+                ":crate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "first_two",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "second_two",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "crate",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96f80dc9-2a3b-4b21-9474-682207e6db63",
+              "name": "Newline-delimited JSON index entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":first_two",
+                    ":second_two",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "first_two",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "second_two",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "{\"name\":\"serde\",\"vers\":\"1.0.0\",\"deps\":[],\"cksum\":\"...\",\"features\":{},\"yanked\":false,\"v\":2}\n{\"name\":\"serde\",\"vers\":\"1.0.1\",\"deps\":[],\"cksum\":\"...\",\"features\":{},\"yanked\":false,\"v\":2}\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09017944-2c51-4c35-853a-5c697772d444",
+              "name": "Not modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":first_two",
+                    ":second_two",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "first_two",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "second_two",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d0ca1caa-fd13-48b3-9a67-8f8f0ca2f95d",
+              "name": "Crate not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":first_two",
+                    ":second_two",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "first_two",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "second_two",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "42f4df4f-26ab-47c5-9ff4-998d3196ccd1",
+      "name": "Config",
+      "description": {
+        "content": "Registry configuration document",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bdf81a6a-cae3-4c2f-9996-6ad9c8e0ca31",
+          "name": "Get Registry Configuration",
+          "request": {
+            "name": "Get Registry Configuration",
+            "description": {
+              "content": "Returns the registry configuration document. Must be the first request a sparse-index client makes; controls download URL templates, publishing endpoint, and authentication requirements.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7dc2ecec-cc29-4aee-a7a2-24736cb78bdd",
+              "name": "The registry configuration document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dl\": \"https://crates.io/api/v1/crates\",\n  \"api\": \"https://crates.io\",\n  \"auth-required\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://index.crates.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3a2b6283-4bbf-49c4-831a-9a0869138aab",
+    "name": "crates.io Sparse Index API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.\n\n\nContact Support:\n Name: crates.io Team\n Email: help@crates.io",
+      "type": "text/plain"
+    }
+  }
+}
