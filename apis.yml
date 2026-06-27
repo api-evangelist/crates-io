@@ -24,9 +24,9 @@ apis:
       - url: rules/crates-io-rules.yml
         type: SpectralRules
       - url: examples/crates-io-search-example.json
-        type: Example
+        type: Examples
       - url: examples/crates-io-get-crate-example.json
-        type: Example
+        type: Examples
     description: >
       The crates.io Web API exposes the endpoints used by Cargo and the crates.io website to search the registry, fetch
       crate and version metadata, publish new versions, yank and unyank versions, and manage crate ownership. Hosted at
@@ -51,9 +51,9 @@ apis:
       - url: json-schema/crates-io-index-entry-schema.json
         type: JSONSchema
       - url: examples/crates-io-config-example.json
-        type: Example
+        type: Examples
       - url: examples/crates-io-sparse-index-example.json
-        type: Example
+        type: Examples
     description: >
       The crates.io sparse index at https://index.crates.io serves the registry config document plus per-crate
       newline-delimited JSON metadata files over HTTP, replacing the legacy git index clone. Cargo uses the sparse
@@ -107,19 +107,19 @@ common:
     type: SourceCode
   - url: https://github.com/rust-lang/crates-io-auth-action
     name: crates-io-auth-action (Trusted Publishing)
-    type: Tool
+    type: Tools
   - url: https://github.com/rust-lang/crates-io-cargo-teams
     name: crates.io and Cargo Teams Home
     type: GitHubOrganization
   - url: https://github.com/rust-lang/crates-io-ops-bot
     name: crates-io-ops-bot
-    type: Tool
+    type: Tools
   - url: https://github.com/rust-lang/crates_io_og_image
     name: crates.io OpenGraph image generator
-    type: Tool
+    type: Tools
   - url: https://github.com/rust-lang/crates-io-heroku-metrics
     name: crates.io Heroku metrics collector
-    type: Tool
+    type: Tools
   - url: https://status.crates.io/
     name: crates.io Status
     type: StatusPage
@@ -149,10 +149,10 @@ common:
     type: Support
   - url: https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io
     name: Zulip —
-    type: Forum
+    type: Forums
   - url: https://github.com/rust-lang/crates.io/discussions
     name: GitHub Discussions
-    type: Forum
+    type: Forums
   - url: https://crates.io/policies
     name: Policies
     type: Documentation
