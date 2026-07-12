@@ -72,6 +72,12 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: VulnerabilityDisclosure
+    url: security/crates-io-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/crates-io-domain-security.yml
+  - type: Authentication
+    url: authentication/crates-io-authentication.yml
   - url: https://crates.io
     name: crates.io
     type: Portal

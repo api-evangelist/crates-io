@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/crates-io-web-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiTokenAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: A crates.io API token created at https://crates.io/settings/tokens. The raw token
+    is sent in the Authorization header without a Bearer prefix.
+  sources:
+  - openapi/crates-io-web-api-openapi.yml
