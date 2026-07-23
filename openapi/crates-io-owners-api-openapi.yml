@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: crates.io Sparse Index Config Owners API
+  description: 'The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
+
+    '
+  version: v1
+  contact:
+    name: crates.io Team
+    email: help@crates.io
+    url: https://crates.io
+  license:
+    name: Cargo Documentation (MIT/Apache-2.0)
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+servers:
+- url: https://index.crates.io
+  description: crates.io Sparse Index (sparse+https://index.crates.io/)
+tags:
+- name: Owners
+  description: List, add, and remove crate owners
+paths:
+  /api/v1/crates/{crate}/owners:
+    get:
+      summary: List Crate Owners
+      description: Returns the list of users and teams that own a crate.
+      operationId: listOwners
+      tags:
+      - Owners
+      parameters:
+      - $ref: '#/components/parameters/CrateName'
+      responses:
+        '200':
+          description: Owner list document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnersResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+    put:
+      summary: Add Crate Owner
+      description: Invite a user or team as an owner of the crate.
+      operationId: addOwner
+      tags:
+      - Owners
+      parameters:
+      - $ref: '#/components/parameters/CrateName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnersChange'
+      responses:
+        '200':
+          description: Owner invitation issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkMessageResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+    delete:
+      summary: Remove Crate Owner
+      description: Remove a user or team from the owners of the crate.
+      operationId: removeOwner
+      tags:
+      - Owners
+      parameters:
+      - $ref: '#/components/parameters/CrateName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnersChange'
+      responses:
+        '200':
+          description: Owner removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkMessageResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+components:
+  parameters:
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
+  schemas:
+    OwnersChange:
+      type: object
+      required:
+      - users
+      properties:
+        users:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            description: A GitHub login (user) or a github:org:team identifier (team).
+    Owner:
+      type: object
+      required:
+      - id
+      - login
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
+          enum:
+          - user
+          - team
+        avatar:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+    ErrorResponse:
+      type: object
+      required:
+      - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              detail:
+                type: string
+    OkMessageResponse:
+      type: object
+      required:
+      - ok
+      properties:
+        ok:
+          type: boolean
+        msg:
+          type: string
+    OwnersResponse:
+      type: object
+      required:
+      - users
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/Owner'
+  responses:
+    Error:
+      description: Error envelope returned by the crates.io API.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

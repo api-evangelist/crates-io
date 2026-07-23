@@ -1,0 +1,152 @@
+openapi: 3.1.0
+info:
+  title: crates.io Sparse Config Index API
+  description: 'The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
+
+    '
+  version: v1
+  contact:
+    name: crates.io Team
+    email: help@crates.io
+    url: https://crates.io
+  license:
+    name: Cargo Documentation (MIT/Apache-2.0)
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+servers:
+- url: https://index.crates.io
+  description: crates.io Sparse Index (sparse+https://index.crates.io/)
+tags:
+- name: Index
+  description: Per-crate index metadata files served over HTTP
+paths:
+  /1/{crate}:
+    get:
+      summary: Get Index For One-Character Crate
+      description: Returns the newline-delimited JSON index entries for a single-character crate name (e.g. /1/a).
+      operationId: getIndexOneChar
+      tags:
+      - Index
+      parameters:
+      - name: crate
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 1
+      responses:
+        '200':
+          description: Newline-delimited JSON index entries.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '304':
+          description: Not modified (ETag/If-None-Match match).
+        '404':
+          description: Crate not found.
+  /2/{crate}:
+    get:
+      summary: Get Index For Two-Character Crate
+      description: Returns the newline-delimited JSON index entries for a two-character crate name (e.g. /2/io).
+      operationId: getIndexTwoChar
+      tags:
+      - Index
+      parameters:
+      - name: crate
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 2
+      responses:
+        '200':
+          description: Newline-delimited JSON index entries.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '304':
+          description: Not modified.
+        '404':
+          description: Crate not found.
+  /3/{first}/{crate}:
+    get:
+      summary: Get Index For Three-Character Crate
+      description: Returns the newline-delimited JSON index entries for a three-character crate name. Path uses the first character as a directory (e.g. /3/r/rng).
+      operationId: getIndexThreeChar
+      tags:
+      - Index
+      parameters:
+      - name: first
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 1
+      - name: crate
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 3
+      responses:
+        '200':
+          description: Newline-delimited JSON index entries.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '304':
+          description: Not modified.
+        '404':
+          description: Crate not found.
+  /{first_two}/{second_two}/{crate}:
+    get:
+      summary: Get Index For Four-Plus-Character Crate
+      description: 'Returns the newline-delimited JSON index entries for a crate with four or more characters. Path uses the first two characters as the first directory and characters three and four as the second directory (e.g. /se/rd/serde for "serde", /to/ki/tokio for "tokio").
+
+        '
+      operationId: getIndexLong
+      tags:
+      - Index
+      parameters:
+      - name: first_two
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 2
+      - name: second_two
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 2
+      - name: crate
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 4
+      responses:
+        '200':
+          description: Newline-delimited JSON index entries.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: '{"name":"serde","vers":"1.0.0","deps":[],"cksum":"...","features":{},"yanked":false,"v":2}
+
+                {"name":"serde","vers":"1.0.1","deps":[],"cksum":"...","features":{},"yanked":false,"v":2}
+
+                '
+        '304':
+          description: Not modified.
+        '404':
+          description: Crate not found.

@@ -1,0 +1,57 @@
+openapi: 3.1.0
+info:
+  title: crates.io Sparse Index Config API
+  description: 'The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
+
+    '
+  version: v1
+  contact:
+    name: crates.io Team
+    email: help@crates.io
+    url: https://crates.io
+  license:
+    name: Cargo Documentation (MIT/Apache-2.0)
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+servers:
+- url: https://index.crates.io
+  description: crates.io Sparse Index (sparse+https://index.crates.io/)
+tags:
+- name: Config
+  description: Registry configuration document
+paths:
+  /config.json:
+    get:
+      summary: Get Registry Configuration
+      description: 'Returns the registry configuration document. Must be the first request a sparse-index client makes; controls download URL templates, publishing endpoint, and authentication requirements.
+
+        '
+      operationId: getRegistryConfig
+      tags:
+      - Config
+      responses:
+        '200':
+          description: The registry configuration document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistryConfig'
+              example:
+                dl: https://crates.io/api/v1/crates
+                api: https://crates.io
+                auth-required: false
+components:
+  schemas:
+    RegistryConfig:
+      type: object
+      required:
+      - dl
+      properties:
+        dl:
+          type: string
+          description: Download URL template for .crate files. Supports {crate}, {version}, {prefix}, {lowerprefix}, and {sha256-checksum} markers.
+        api:
+          type: string
+          description: Base URL of the Web API used for publishing, yanking, owners, and search.
+        auth-required:
+          type: boolean
+          description: Whether all index and download operations require an Authorization header.

@@ -1,0 +1,194 @@
+openapi: 3.1.0
+info:
+  title: crates.io Sparse Index Config Versions API
+  description: 'The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
+
+    '
+  version: v1
+  contact:
+    name: crates.io Team
+    email: help@crates.io
+    url: https://crates.io
+  license:
+    name: Cargo Documentation (MIT/Apache-2.0)
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+servers:
+- url: https://index.crates.io
+  description: crates.io Sparse Index (sparse+https://index.crates.io/)
+tags:
+- name: Versions
+  description: Yank and unyank crate versions
+paths:
+  /api/v1/crates/{crate}/{version}:
+    get:
+      summary: Get Crate Version
+      description: Retrieve metadata for a specific version of a crate.
+      operationId: getCrateVersion
+      tags:
+      - Versions
+      security: []
+      parameters:
+      - $ref: '#/components/parameters/CrateName'
+      - $ref: '#/components/parameters/Version'
+      responses:
+        '200':
+          description: Version metadata document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionDetailResponse'
+        '404':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}/{version}/download:
+    get:
+      summary: Download Crate Tarball
+      description: 'Returns a redirect to the .crate tarball stored in the crates.io S3 bucket. This is the canonical download URL used by Cargo.
+
+        '
+      operationId: downloadCrate
+      tags:
+      - Versions
+      security: []
+      parameters:
+      - $ref: '#/components/parameters/CrateName'
+      - $ref: '#/components/parameters/Version'
+      responses:
+        '302':
+          description: Redirect to the gzipped tar archive of the crate version.
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+        '404':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}/{version}/yank:
+    delete:
+      summary: Yank A Crate Version
+      description: 'Mark a specific crate version as yanked so that it is no longer selected as a fresh dependency. Existing Cargo.lock files continue to resolve against yanked versions.
+
+        '
+      operationId: yankVersion
+      tags:
+      - Versions
+      parameters:
+      - $ref: '#/components/parameters/CrateName'
+      - $ref: '#/components/parameters/Version'
+      responses:
+        '200':
+          description: Yank successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}/{version}/unyank:
+    put:
+      summary: Unyank A Crate Version
+      description: Restore a previously yanked version of a crate.
+      operationId: unyankVersion
+      tags:
+      - Versions
+      parameters:
+      - $ref: '#/components/parameters/CrateName'
+      - $ref: '#/components/parameters/Version'
+      responses:
+        '200':
+          description: Unyank successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    Version:
+      type: object
+      required:
+      - num
+      - crate
+      properties:
+        id:
+          type: integer
+        crate:
+          type: string
+        num:
+          type: string
+        dl_path:
+          type: string
+        readme_path:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        downloads:
+          type: integer
+        features:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        yanked:
+          type: boolean
+        license:
+          type: string
+        rust_version:
+          type: string
+          nullable: true
+        crate_size:
+          type: integer
+          nullable: true
+    OkResponse:
+      type: object
+      required:
+      - ok
+      properties:
+        ok:
+          type: boolean
+    ErrorResponse:
+      type: object
+      required:
+      - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              detail:
+                type: string
+    VersionDetailResponse:
+      type: object
+      required:
+      - version
+      properties:
+        version:
+          $ref: '#/components/schemas/Version'
+  responses:
+    Error:
+      description: Error envelope returned by the crates.io API.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
+    Version:
+      name: version
+      in: path
+      required: true
+      description: The semver version of the crate (e.g. 1.0.0).
+      schema:
+        type: string

@@ -1,0 +1,322 @@
+openapi: 3.1.0
+info:
+  title: .io Sparse Index Config Crates API
+  description: 'The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
+
+    '
+  version: v1
+  contact:
+    name: crates.io Team
+    email: help@crates.io
+    url: https://crates.io
+  license:
+    name: Cargo Documentation (MIT/Apache-2.0)
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+servers:
+- url: https://index.crates.io
+  description: crates.io Sparse Index (sparse+https://index.crates.io/)
+tags:
+- name: Crates
+  description: Search and manage Rust crates
+paths:
+  /api/v1/crates:
+    get:
+      summary: Search Crates
+      description: 'Search the crates.io registry for crates by query string. Returns a paginated list of matching crates with summary metadata. No authentication required.
+
+        '
+      operationId: searchCrates
+      tags:
+      - Crates
+      security: []
+      parameters:
+      - name: q
+        in: query
+        description: The search query string.
+        required: false
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        description: Number of results per page (1-100, default 10).
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 10
+      - name: page
+        in: query
+        description: Page number to return.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: sort
+        in: query
+        description: Sort order (alpha, downloads, recent-downloads, recent-updates, new).
+        required: false
+        schema:
+          type: string
+          enum:
+          - alpha
+          - downloads
+          - recent-downloads
+          - recent-updates
+          - new
+      responses:
+        '200':
+          description: A paginated list of crates matching the query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrateSearchResponse'
+        '400':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/new:
+    put:
+      summary: Publish A New Crate Version
+      description: 'Publish a new crate or crate version. The request body is a binary envelope containing a 32-bit little-endian length, the JSON metadata, a 32-bit little-endian length, and the .crate tarball.
+
+        '
+      operationId: publishCrate
+      tags:
+      - Crates
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+              description: 32-bit LE metadata length, JSON metadata, 32-bit LE crate length, crate tarball.
+      responses:
+        '200':
+          description: The crate was published successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+        '403':
+          $ref: '#/components/responses/Error'
+        '422':
+          $ref: '#/components/responses/Error'
+  /api/v1/crates/{crate}:
+    get:
+      summary: Get Crate Details
+      description: Retrieve full metadata for a single crate including versions, owners, and keywords.
+      operationId: getCrate
+      tags:
+      - Crates
+      security: []
+      parameters:
+      - $ref: '#/components/parameters/CrateName'
+      responses:
+        '200':
+          description: Crate detail document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrateDetailResponse'
+        '404':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        category:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        crates_cnt:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    CrateSearchResponse:
+      type: object
+      required:
+      - crates
+      - meta
+      properties:
+        crates:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrateSummary'
+        meta:
+          $ref: '#/components/schemas/SearchMeta'
+    CrateDetailResponse:
+      type: object
+      required:
+      - crate
+      properties:
+        crate:
+          $ref: '#/components/schemas/CrateSummary'
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Version'
+        keywords:
+          type: array
+          items:
+            $ref: '#/components/schemas/Keyword'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+    CrateSummary:
+      type: object
+      required:
+      - name
+      - max_version
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        max_version:
+          type: string
+        max_stable_version:
+          type: string
+        newest_version:
+          type: string
+        downloads:
+          type: integer
+        recent_downloads:
+          type: integer
+        repository:
+          type: string
+        documentation:
+          type: string
+        homepage:
+          type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        categories:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Version:
+      type: object
+      required:
+      - num
+      - crate
+      properties:
+        id:
+          type: integer
+        crate:
+          type: string
+        num:
+          type: string
+        dl_path:
+          type: string
+        readme_path:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        downloads:
+          type: integer
+        features:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        yanked:
+          type: boolean
+        license:
+          type: string
+        rust_version:
+          type: string
+          nullable: true
+        crate_size:
+          type: integer
+          nullable: true
+    SearchMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        next_page:
+          type: string
+          nullable: true
+        prev_page:
+          type: string
+          nullable: true
+    ErrorResponse:
+      type: object
+      required:
+      - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              detail:
+                type: string
+    Keyword:
+      type: object
+      properties:
+        id:
+          type: string
+        keyword:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        crates_cnt:
+          type: integer
+    PublishResponse:
+      type: object
+      properties:
+        warnings:
+          type: object
+          properties:
+            invalid_categories:
+              type: array
+              items:
+                type: string
+            invalid_badges:
+              type: array
+              items:
+                type: string
+            other:
+              type: array
+              items:
+                type: string
+  responses:
+    Error:
+      description: Error envelope returned by the crates.io API.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
