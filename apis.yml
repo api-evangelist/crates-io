@@ -1,64 +1,171 @@
 aid: crates-io
 url: https://raw.githubusercontent.com/api-evangelist/crates-io/refs/heads/main/apis.yml
 apis:
-  - aid: crates-io:crates-io-web-api
-    name: crates.io Web API
-    tags:
-      - Crates
-      - Package Registry
-      - Rust
-      - Search
-      - Publishing
-    humanURL: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
-    properties:
-      - url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
-        type: Documentation
-      - url: openapi/crates-io-web-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/crates-io-crate-schema.json
-        type: JSONSchema
-      - url: json-structure/crates-io-crate-structure.json
-        type: JSONStructure
-      - url: json-ld/crates-io-context.jsonld
-        type: JSONLD
-      - url: rules/crates-io-rules.yml
-        type: SpectralRules
-      - url: examples/crates-io-search-example.json
-        type: Examples
-      - url: examples/crates-io-get-crate-example.json
-        type: Examples
-    description: >
-      The crates.io Web API exposes the endpoints used by Cargo and the crates.io website to search the registry, fetch
-      crate and version metadata, publish new versions, yank and unyank versions, and manage crate ownership. Hosted at
-      https://crates.io/api/v1, it is the canonical implementation of the Cargo Registry Web API specification
-      documented in the Cargo book.
-  - aid: crates-io:crates-io-sparse-index
-    name: crates.io Sparse Index
-    tags:
-      - Index
-      - Package Registry
-      - Rust
-      - Sparse Protocol
-    humanURL: https://doc.rust-lang.org/cargo/reference/registry-index.html
-    properties:
-      - url: https://doc.rust-lang.org/cargo/reference/registry-index.html
-        type: Documentation
-      - url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
-        type: Documentation
-        name: Sparse registry protocol stabilized in Rust 1.68
-      - url: openapi/crates-io-sparse-index-openapi.yml
-        type: OpenAPI
-      - url: json-schema/crates-io-index-entry-schema.json
-        type: JSONSchema
-      - url: examples/crates-io-config-example.json
-        type: Examples
-      - url: examples/crates-io-sparse-index-example.json
-        type: Examples
-    description: >
-      The crates.io sparse index at https://index.crates.io serves the registry config document plus per-crate
-      newline-delimited JSON metadata files over HTTP, replacing the legacy git index clone. Cargo uses the sparse
-      protocol by default since Rust 1.70 (June 2023). Each index entry records a version's dependencies, features,
-      SHA-256 checksum, and yank state.
+- aid: crates-io:crates-io-config-api
+  name: crates.io Config API
+  description: Registry configuration document
+  humanURL: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  tags:
+  - Config
+  properties:
+  - type: OpenAPI
+    url: openapi/crates-io-config-api-openapi.yml
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  - type: JSONSchema
+    url: json-schema/crates-io-crate-schema.json
+  - type: JSONStructure
+    url: json-structure/crates-io-crate-structure.json
+  - type: JSONLD
+    url: json-ld/crates-io-context.jsonld
+  - type: SpectralRules
+    url: rules/crates-io-rules.yml
+  - type: Examples
+    url: examples/crates-io-search-example.json
+  - type: Examples
+    url: examples/crates-io-get-crate-example.json
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+  - type: Documentation
+    url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
+  - type: JSONSchema
+    url: json-schema/crates-io-index-entry-schema.json
+  - type: Examples
+    url: examples/crates-io-config-example.json
+  - type: Examples
+    url: examples/crates-io-sparse-index-example.json
+- aid: crates-io:crates-io-crates-api
+  name: crates.io Crates API
+  description: Search and manage Rust crates
+  humanURL: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  tags:
+  - Crates
+  properties:
+  - type: OpenAPI
+    url: openapi/crates-io-crates-api-openapi.yml
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  - type: JSONSchema
+    url: json-schema/crates-io-crate-schema.json
+  - type: JSONStructure
+    url: json-structure/crates-io-crate-structure.json
+  - type: JSONLD
+    url: json-ld/crates-io-context.jsonld
+  - type: SpectralRules
+    url: rules/crates-io-rules.yml
+  - type: Examples
+    url: examples/crates-io-search-example.json
+  - type: Examples
+    url: examples/crates-io-get-crate-example.json
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+  - type: Documentation
+    url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
+  - type: JSONSchema
+    url: json-schema/crates-io-index-entry-schema.json
+  - type: Examples
+    url: examples/crates-io-config-example.json
+  - type: Examples
+    url: examples/crates-io-sparse-index-example.json
+- aid: crates-io:crates-io-index-api
+  name: crates.io Index API
+  description: Per-crate index metadata files served over HTTP
+  humanURL: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  tags:
+  - Index
+  properties:
+  - type: OpenAPI
+    url: openapi/crates-io-index-api-openapi.yml
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  - type: JSONSchema
+    url: json-schema/crates-io-crate-schema.json
+  - type: JSONStructure
+    url: json-structure/crates-io-crate-structure.json
+  - type: JSONLD
+    url: json-ld/crates-io-context.jsonld
+  - type: SpectralRules
+    url: rules/crates-io-rules.yml
+  - type: Examples
+    url: examples/crates-io-search-example.json
+  - type: Examples
+    url: examples/crates-io-get-crate-example.json
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+  - type: Documentation
+    url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
+  - type: JSONSchema
+    url: json-schema/crates-io-index-entry-schema.json
+  - type: Examples
+    url: examples/crates-io-config-example.json
+  - type: Examples
+    url: examples/crates-io-sparse-index-example.json
+- aid: crates-io:crates-io-owners-api
+  name: crates.io Owners API
+  description: List, add, and remove crate owners
+  humanURL: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  tags:
+  - Owners
+  properties:
+  - type: OpenAPI
+    url: openapi/crates-io-owners-api-openapi.yml
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  - type: JSONSchema
+    url: json-schema/crates-io-crate-schema.json
+  - type: JSONStructure
+    url: json-structure/crates-io-crate-structure.json
+  - type: JSONLD
+    url: json-ld/crates-io-context.jsonld
+  - type: SpectralRules
+    url: rules/crates-io-rules.yml
+  - type: Examples
+    url: examples/crates-io-search-example.json
+  - type: Examples
+    url: examples/crates-io-get-crate-example.json
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+  - type: Documentation
+    url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
+  - type: JSONSchema
+    url: json-schema/crates-io-index-entry-schema.json
+  - type: Examples
+    url: examples/crates-io-config-example.json
+  - type: Examples
+    url: examples/crates-io-sparse-index-example.json
+- aid: crates-io:crates-io-versions-api
+  name: crates.io Versions API
+  description: Yank and unyank crate versions
+  humanURL: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  tags:
+  - Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/crates-io-versions-api-openapi.yml
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-web-api.html
+  - type: JSONSchema
+    url: json-schema/crates-io-crate-schema.json
+  - type: JSONStructure
+    url: json-structure/crates-io-crate-structure.json
+  - type: JSONLD
+    url: json-ld/crates-io-context.jsonld
+  - type: SpectralRules
+    url: rules/crates-io-rules.yml
+  - type: Examples
+    url: examples/crates-io-search-example.json
+  - type: Examples
+    url: examples/crates-io-get-crate-example.json
+  - type: Documentation
+    url: https://doc.rust-lang.org/cargo/reference/registry-index.html
+  - type: Documentation
+    url: https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html
+  - type: JSONSchema
+    url: json-schema/crates-io-index-entry-schema.json
+  - type: Examples
+    url: examples/crates-io-config-example.json
+  - type: Examples
+    url: examples/crates-io-sparse-index-example.json
 name: crates.io
 tags:
   - Rust
@@ -69,7 +176,19 @@ tags:
   - Developer Tools
   - Rust Foundation
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/crates-io.png
 access: 3rd-Party
 common:
   - type: AgenticAccess
