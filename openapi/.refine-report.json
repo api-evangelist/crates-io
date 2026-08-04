@@ -1,0 +1,22 @@
+{
+  "provider": "crates-io",
+  "sources": [
+    "crates-io-config-api-openapi.yml",
+    "crates-io-crates-api-openapi.yml",
+    "crates-io-index-api-openapi.yml",
+    "crates-io-owners-api-openapi.yml",
+    "crates-io-versions-api-openapi.yml"
+  ],
+  "outputs": [
+    "crates-io-config-api-openapi.yml",
+    "crates-io-crates-api-openapi.yml",
+    "crates-io-index-api-openapi.yml",
+    "crates-io-owners-api-openapi.yml",
+    "crates-io-versions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
