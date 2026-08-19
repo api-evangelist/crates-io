@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "a2192688-f28e-42f4-b3ff-9783c094b5da",
+      "name": "Config",
+      "description": {
+        "content": "Registry configuration document",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8bc1f54e-f3ec-495e-8543-23f74d28135c",
+          "name": "Get Registry Configuration",
+          "request": {
+            "name": "Get Registry Configuration",
+            "description": {
+              "content": "Returns the registry configuration document. Must be the first request a sparse-index client makes; controls download URL templates, publishing endpoint, and authentication requirements.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e61b2c7-9ce5-40a2-bef8-e2dbb9b211e2",
+              "name": "The registry configuration document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dl\": \"https://crates.io/api/v1/crates\",\n  \"api\": \"https://crates.io\",\n  \"auth-required\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://index.crates.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b89bf0c0-3ddd-4887-bb03-d8455d76f39c",
+    "name": "crates.io Sparse Index Config API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.\n\n\nContact Support:\n Name: crates.io Team\n Email: help@crates.io",
+      "type": "text/plain"
+    }
+  }
+}

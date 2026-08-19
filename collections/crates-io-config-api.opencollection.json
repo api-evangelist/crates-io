@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "crates.io Sparse Index Config API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Registry Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/config.json"
+          },
+          "docs": "Returns the registry configuration document. Must be the first request a sparse-index client makes; controls download URL templates, publishing endpoint, and authentication requirements.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

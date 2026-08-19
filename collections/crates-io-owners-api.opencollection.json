@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "crates.io Sparse Index Config Owners API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Owners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Crate Owners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/api/v1/crates/:crate/owners",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              }
+            ]
+          },
+          "docs": "Returns the list of users and teams that own a crate."
+        },
+        {
+          "info": {
+            "name": "Add Crate Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://index.crates.io/api/v1/crates/:crate/owners",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invite a user or team as an owner of the crate."
+        },
+        {
+          "info": {
+            "name": "Remove Crate Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://index.crates.io/api/v1/crates/:crate/owners",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a user or team from the owners of the crate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

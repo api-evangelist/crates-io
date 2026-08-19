@@ -1,0 +1,509 @@
+{
+  "item": [
+    {
+      "id": "453fadfe-e8dc-4fdf-81ff-abe5c3d49922",
+      "name": "Crates",
+      "description": {
+        "content": "Search and manage Rust crates",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "27e722a7-547a-45e8-9cb9-0e522103fcbe",
+          "name": "Search Crates",
+          "request": {
+            "name": "Search Crates",
+            "description": {
+              "content": "Search the crates.io registry for crates by query string. Returns a paginated list of matching crates with summary metadata. No authentication required.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "crates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "The search query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "10",
+                  "description": "Number of results per page (1-100, default 10)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort order (alpha, downloads, recent-downloads, recent-updates, new)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "089c3942-4ed9-4e1e-8e7b-c69bd6e4aa9c",
+              "name": "A paginated list of crates matching the query.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "crates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"crates\": [\n    {\n      \"name\": \"string\",\n      \"max_version\": \"string\",\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"max_stable_version\": \"string\",\n      \"newest_version\": \"string\",\n      \"downloads\": 7091,\n      \"recent_downloads\": 8013,\n      \"repository\": \"string\",\n      \"documentation\": \"string\",\n      \"homepage\": \"string\",\n      \"keywords\": [\n        \"string\",\n        \"string\"\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1951-10-19T08:57:50.750Z\",\n      \"updated_at\": \"1976-12-24T05:27:27.143Z\"\n    },\n    {\n      \"name\": \"string\",\n      \"max_version\": \"string\",\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"max_stable_version\": \"string\",\n      \"newest_version\": \"string\",\n      \"downloads\": 7584,\n      \"recent_downloads\": 4511,\n      \"repository\": \"string\",\n      \"documentation\": \"string\",\n      \"homepage\": \"string\",\n      \"keywords\": [\n        \"string\",\n        \"string\"\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1953-02-01T03:24:55.009Z\",\n      \"updated_at\": \"1958-09-18T13:21:26.638Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 6859,\n    \"next_page\": \"string\",\n    \"prev_page\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1098f1de-21a1-4431-a738-914b310ca366",
+              "name": "Error envelope returned by the crates.io API.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "crates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"string\"\n    },\n    {\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27e71908-ea98-42f2-a4f1-f207ec42444d",
+          "name": "Publish A New Crate Version",
+          "request": {
+            "name": "Publish A New Crate Version",
+            "description": {
+              "content": "Publish a new crate or crate version. The request body is a binary envelope containing a 32-bit little-endian length, the JSON metadata, a 32-bit little-endian length, and the .crate tarball.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "crates",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "a3d20549-36b9-4e7a-9a8e-a445123b2950",
+              "name": "The crate was published successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "crates",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"warnings\": {\n    \"invalid_categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"invalid_badges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"other\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "571f9940-2a03-4142-acfc-91fba84a409e",
+              "name": "Error envelope returned by the crates.io API.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "crates",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"string\"\n    },\n    {\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21cf7d5a-1e3c-49b8-8a05-1874dfc4f6cb",
+              "name": "Error envelope returned by the crates.io API.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "crates",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"string\"\n    },\n    {\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "733c909f-dff9-41cd-84fa-030903780e6d",
+          "name": "Get Crate Details",
+          "request": {
+            "name": "Get Crate Details",
+            "description": {
+              "content": "Retrieve full metadata for a single crate including versions, owners, and keywords.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "crates",
+                ":crate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "crate",
+                  "description": "(Required) The crate name (e.g. serde, tokio, rand)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b489ed8a-0471-4dbb-bfd6-f7517d23733c",
+              "name": "Crate detail document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "crates",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) The crate name (e.g. serde, tokio, rand)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"crate\": {\n    \"name\": \"string\",\n    \"max_version\": \"string\",\n    \"id\": \"string\",\n    \"description\": \"string\",\n    \"max_stable_version\": \"string\",\n    \"newest_version\": \"string\",\n    \"downloads\": 1427,\n    \"recent_downloads\": 9149,\n    \"repository\": \"string\",\n    \"documentation\": \"string\",\n    \"homepage\": \"string\",\n    \"keywords\": [\n      \"string\",\n      \"string\"\n    ],\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"created_at\": \"1982-12-19T21:02:54.037Z\",\n    \"updated_at\": \"1985-04-01T17:07:39.636Z\"\n  },\n  \"versions\": [\n    {\n      \"num\": \"string\",\n      \"crate\": \"string\",\n      \"id\": 919,\n      \"dl_path\": \"string\",\n      \"readme_path\": \"string\",\n      \"updated_at\": \"1959-06-17T09:23:03.188Z\",\n      \"created_at\": \"2026-05-30T17:16:20.929Z\",\n      \"downloads\": 7616,\n      \"features\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"yanked\": false,\n      \"license\": \"string\",\n      \"rust_version\": \"string\",\n      \"crate_size\": 5412\n    },\n    {\n      \"num\": \"string\",\n      \"crate\": \"string\",\n      \"id\": 6260,\n      \"dl_path\": \"string\",\n      \"readme_path\": \"string\",\n      \"updated_at\": \"1950-06-12T17:08:02.207Z\",\n      \"created_at\": \"1950-07-27T09:24:58.472Z\",\n      \"downloads\": 7775,\n      \"features\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"yanked\": true,\n      \"license\": \"string\",\n      \"rust_version\": \"string\",\n      \"crate_size\": 3983\n    }\n  ],\n  \"keywords\": [\n    {\n      \"id\": \"string\",\n      \"keyword\": \"string\",\n      \"created_at\": \"1951-09-12T18:24:16.629Z\",\n      \"crates_cnt\": 9305\n    },\n    {\n      \"id\": \"string\",\n      \"keyword\": \"string\",\n      \"created_at\": \"1951-07-05T20:22:18.471Z\",\n      \"crates_cnt\": 4599\n    }\n  ],\n  \"categories\": [\n    {\n      \"id\": \"string\",\n      \"category\": \"string\",\n      \"slug\": \"string\",\n      \"description\": \"string\",\n      \"crates_cnt\": 1197,\n      \"created_at\": \"1973-01-19T16:43:31.504Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"category\": \"string\",\n      \"slug\": \"string\",\n      \"description\": \"string\",\n      \"crates_cnt\": 1401,\n      \"created_at\": \"1983-11-27T02:41:46.721Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "401bc06b-92dc-431f-9e85-8e7185800eb3",
+              "name": "Error envelope returned by the crates.io API.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "crates",
+                    ":crate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "crate",
+                      "description": "(Required) The crate name (e.g. serde, tokio, rand)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"string\"\n    },\n    {\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://index.crates.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0ad8dc76-0ce0-4a94-8d32-e74eee7299ae",
+    "name": ".io Sparse Index Config Crates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.\n\n\nContact Support:\n Name: crates.io Team\n Email: help@crates.io",
+      "type": "text/plain"
+    }
+  }
+}

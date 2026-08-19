@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": ".io Sparse Index Config Crates API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Crates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Crates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/api/v1/crates",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-100, default 10)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to return."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order (alpha, downloads, recent-downloads, recent-updates, new)."
+              }
+            ]
+          },
+          "docs": "Search the crates.io registry for crates by query string. Returns a paginated list of matching crates with summary metadata. No authentication required.\n"
+        },
+        {
+          "info": {
+            "name": "Publish A New Crate Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://index.crates.io/api/v1/crates/new"
+          },
+          "docs": "Publish a new crate or crate version. The request body is a binary envelope containing a 32-bit little-endian length, the JSON metadata, a 32-bit little-endian length, and the .crate tarball.\n"
+        },
+        {
+          "info": {
+            "name": "Get Crate Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://index.crates.io/api/v1/crates/:crate",
+            "params": [
+              {
+                "name": "crate",
+                "value": "",
+                "type": "path",
+                "description": "The crate name (e.g. serde, tokio, rand)."
+              }
+            ]
+          },
+          "docs": "Retrieve full metadata for a single crate including versions, owners, and keywords."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
