@@ -184,6 +184,19 @@ tags_raw:
   - Developer Tools
   - Rust Foundation
 kind: contract
+deliveryModel:
+  model: unknown
+  license: Apache 2.0 License
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - license
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
