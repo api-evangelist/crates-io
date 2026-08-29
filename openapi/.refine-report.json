@@ -1,22 +1,29 @@
 {
   "provider": "crates-io",
   "sources": [
-    "crates-io-config-api-openapi.yml",
-    "crates-io-crates-api-openapi.yml",
-    "crates-io-index-api-openapi.yml",
-    "crates-io-owners-api-openapi.yml",
-    "crates-io-versions-api-openapi.yml"
+    "_original/crates-io-sparse-index-openapi.yml",
+    "_original/crates-io-web-api-openapi.yml"
   ],
   "outputs": [
     "crates-io-config-api-openapi.yml",
-    "crates-io-crates-api-openapi.yml",
     "crates-io-index-api-openapi.yml",
+    "crates-io-crates-api-openapi.yml",
     "crates-io-owners-api-openapi.yml",
     "crates-io-versions-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "crates-io-sparse-index-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "crates-io-web-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "crates-io-config-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "crates-io-crates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "crates-io-index-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "crates-io-owners-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "crates-io-versions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
