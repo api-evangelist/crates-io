@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: .io Web Crates API
-  description: 'The crates.io Registry Web API exposes endpoints used by Cargo and the crates.io website for searching, publishing, yanking, and managing crate ownership. The API is hosted at https://crates.io under the /api/v1 prefix and is the canonical implementation of the Cargo Registry Web API specification.
-
-    '
+  description: The crates.io Registry Web API exposes endpoints used by Cargo and the crates.io website for searching, publishing, yanking, and managing crate ownership. The API is hosted at https://crates.io under the /api/v1 prefix and is the canonical implementation of the Cargo Registry Web API specification.
   version: v1
   contact:
     name: crates.io Team
@@ -24,9 +22,7 @@ paths:
   /api/v1/crates:
     get:
       summary: Search Crates
-      description: 'Search the crates.io registry for crates by query string. Returns a paginated list of matching crates with summary metadata. No authentication required.
-
-        '
+      description: Search the crates.io registry for crates by query string. Returns a paginated list of matching crates with summary metadata. No authentication required.
       operationId: searchCrates
       tags:
       - Crates
@@ -79,9 +75,7 @@ paths:
   /api/v1/crates/new:
     put:
       summary: Publish A New Crate Version
-      description: 'Publish a new crate or crate version. The request body is a binary envelope containing a 32-bit little-endian length, the JSON metadata, a 32-bit little-endian length, and the .crate tarball.
-
-        '
+      description: Publish a new crate or crate version. The request body is a binary envelope containing a 32-bit little-endian length, the JSON metadata, a 32-bit little-endian length, and the .crate tarball.
       operationId: publishCrate
       tags:
       - Crates
@@ -125,17 +119,6 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
-    SearchMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        next_page:
-          type: string
-          nullable: true
-        prev_page:
-          type: string
-          nullable: true
     ErrorResponse:
       type: object
       required:
@@ -148,6 +131,18 @@ components:
             properties:
               detail:
                 type: string
+    CrateSearchResponse:
+      type: object
+      required:
+      - crates
+      - meta
+      properties:
+        crates:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrateSummary'
+        meta:
+          $ref: '#/components/schemas/SearchMeta'
     CrateDetailResponse:
       type: object
       required:
@@ -209,48 +204,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    Keyword:
-      type: object
-      properties:
-        id:
-          type: string
-        keyword:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        crates_cnt:
-          type: integer
-    PublishResponse:
-      type: object
-      properties:
-        warnings:
-          type: object
-          properties:
-            invalid_categories:
-              type: array
-              items:
-                type: string
-            invalid_badges:
-              type: array
-              items:
-                type: string
-            other:
-              type: array
-              items:
-                type: string
-    CrateSearchResponse:
-      type: object
-      required:
-      - crates
-      - meta
-      properties:
-        crates:
-          type: array
-          items:
-            $ref: '#/components/schemas/CrateSummary'
-        meta:
-          $ref: '#/components/schemas/SearchMeta'
     Version:
       type: object
       required:
@@ -307,6 +260,54 @@ components:
         created_at:
           type: string
           format: date-time
+    PublishResponse:
+      type: object
+      properties:
+        warnings:
+          type: object
+          properties:
+            invalid_categories:
+              type: array
+              items:
+                type: string
+            invalid_badges:
+              type: array
+              items:
+                type: string
+            other:
+              type: array
+              items:
+                type: string
+    Keyword:
+      type: object
+      properties:
+        id:
+          type: string
+        keyword:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        crates_cnt:
+          type: integer
+    SearchMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        next_page:
+          type: string
+          nullable: true
+        prev_page:
+          type: string
+          nullable: true
+  responses:
+    Error:
+      description: Error envelope returned by the crates.io API.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     CrateName:
       name: crate
@@ -315,13 +316,6 @@ components:
       description: The crate name (e.g. serde, tokio, rand).
       schema:
         type: string
-  responses:
-    Error:
-      description: Error envelope returned by the crates.io API.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

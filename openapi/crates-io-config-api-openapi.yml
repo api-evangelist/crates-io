@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: crates.io Sparse Index Config API
-  description: 'The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
-
-    '
+  description: The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
   version: v1
   contact:
     name: crates.io Team
@@ -22,9 +20,7 @@ paths:
   /config.json:
     get:
       summary: Get Registry Configuration
-      description: 'Returns the registry configuration document. Must be the first request a sparse-index client makes; controls download URL templates, publishing endpoint, and authentication requirements.
-
-        '
+      description: Returns the registry configuration document. Must be the first request a sparse-index client makes; controls download URL templates, publishing endpoint, and authentication requirements.
       operationId: getRegistryConfig
       tags:
       - Config

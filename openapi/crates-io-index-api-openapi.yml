@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: crates.io Sparse Index API
-  description: 'The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
-
-    '
+  description: The crates.io sparse index serves per-crate metadata files over HTTP rather than requiring a clone of the legacy crates.io-index Git repository. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). The index also publishes a config.json document at the root and supports HTTP cache validation via ETag and Last-Modified.
   version: v1
   contact:
     name: crates.io Team
@@ -107,9 +105,7 @@ paths:
   /{first_two}/{second_two}/{crate}:
     get:
       summary: Get Index For Four-Plus-Character Crate
-      description: 'Returns the newline-delimited JSON index entries for a crate with four or more characters. Path uses the first two characters as the first directory and characters three and four as the second directory (e.g. /se/rd/serde for "serde", /to/ki/tokio for "tokio").
-
-        '
+      description: Returns the newline-delimited JSON index entries for a crate with four or more characters. Path uses the first two characters as the first directory and characters three and four as the second directory (e.g. /se/rd/serde for "serde", /to/ki/tokio for "tokio").
       operationId: getIndexLong
       tags:
       - Index
