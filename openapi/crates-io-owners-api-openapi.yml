@@ -86,30 +86,22 @@ paths:
         '403':
           $ref: '#/components/responses/Error'
 components:
+  responses:
+    Error:
+      description: Error envelope returned by the crates.io API.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
   schemas:
-    ErrorResponse:
-      type: object
-      required:
-      - errors
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              detail:
-                type: string
-    OwnersChange:
-      type: object
-      required:
-      - users
-      properties:
-        users:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            description: A GitHub login (user) or a github:org:team identifier (team).
     OkMessageResponse:
       type: object
       required:
@@ -142,6 +134,17 @@ components:
         url:
           type: string
           format: uri
+    OwnersChange:
+      type: object
+      required:
+      - users
+      properties:
+        users:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            description: A GitHub login (user) or a github:org:team identifier (team).
     OwnersResponse:
       type: object
       required:
@@ -151,21 +154,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Owner'
-  responses:
-    Error:
-      description: Error envelope returned by the crates.io API.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    CrateName:
-      name: crate
-      in: path
-      required: true
-      description: The crate name (e.g. serde, tokio, rand).
-      schema:
-        type: string
+    ErrorResponse:
+      type: object
+      required:
+      - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              detail:
+                type: string
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

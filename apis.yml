@@ -172,7 +172,7 @@ tags:
   - Package Registry
   - Crates
   - Cargo
-  - Open-Source
+  - Open Source
   - Developer Tools
   - Rust Foundation
 tags_raw:
@@ -183,6 +183,7 @@ tags_raw:
   - Open Source
   - Developer Tools
   - Rust Foundation
+  - Open-Source
 kind: contract
 deliveryModel:
   model: unknown
