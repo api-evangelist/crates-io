@@ -86,22 +86,19 @@ paths:
         '403':
           $ref: '#/components/responses/Error'
 components:
-  responses:
-    Error:
-      description: Error envelope returned by the crates.io API.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    CrateName:
-      name: crate
-      in: path
-      required: true
-      description: The crate name (e.g. serde, tokio, rand).
-      schema:
-        type: string
   schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              detail:
+                type: string
     OkMessageResponse:
       type: object
       required:
@@ -111,6 +108,15 @@ components:
           type: boolean
         msg:
           type: string
+    OwnersResponse:
+      type: object
+      required:
+      - users
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/Owner'
     Owner:
       type: object
       required:
@@ -145,27 +151,21 @@ components:
           items:
             type: string
             description: A GitHub login (user) or a github:org:team identifier (team).
-    OwnersResponse:
-      type: object
-      required:
-      - users
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/Owner'
-    ErrorResponse:
-      type: object
-      required:
-      - errors
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              detail:
-                type: string
+  responses:
+    Error:
+      description: Error envelope returned by the crates.io API.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
   securitySchemes:
     ApiTokenAuth:
       type: apiKey
