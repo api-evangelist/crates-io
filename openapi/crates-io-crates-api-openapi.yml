@@ -118,7 +118,26 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
 components:
+  parameters:
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
   schemas:
+    SearchMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        next_page:
+          type: string
+          nullable: true
+        prev_page:
+          type: string
+          nullable: true
     Version:
       type: object
       required:
@@ -159,36 +178,37 @@ components:
         crate_size:
           type: integer
           nullable: true
-    PublishResponse:
-      type: object
-      properties:
-        warnings:
-          type: object
-          properties:
-            invalid_categories:
-              type: array
-              items:
-                type: string
-            invalid_badges:
-              type: array
-              items:
-                type: string
-            other:
-              type: array
-              items:
-                type: string
-    ErrorResponse:
+    CrateDetailResponse:
       type: object
       required:
-      - errors
+      - crate
       properties:
-        errors:
+        crate:
+          $ref: '#/components/schemas/CrateSummary'
+        versions:
           type: array
           items:
-            type: object
-            properties:
-              detail:
-                type: string
+            $ref: '#/components/schemas/Version'
+        keywords:
+          type: array
+          items:
+            $ref: '#/components/schemas/Keyword'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+    CrateSearchResponse:
+      type: object
+      required:
+      - crates
+      - meta
+      properties:
+        crates:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrateSummary'
+        meta:
+          $ref: '#/components/schemas/SearchMeta'
     CrateSummary:
       type: object
       required:
@@ -231,29 +251,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    SearchMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        next_page:
-          type: string
-          nullable: true
-        prev_page:
-          type: string
-          nullable: true
-    Keyword:
-      type: object
-      properties:
-        id:
-          type: string
-        keyword:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        crates_cnt:
-          type: integer
     Category:
       type: object
       properties:
@@ -270,37 +267,48 @@ components:
         created_at:
           type: string
           format: date-time
-    CrateSearchResponse:
+    ErrorResponse:
       type: object
       required:
-      - crates
-      - meta
+      - errors
       properties:
-        crates:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/CrateSummary'
-        meta:
-          $ref: '#/components/schemas/SearchMeta'
-    CrateDetailResponse:
+            type: object
+            properties:
+              detail:
+                type: string
+    Keyword:
       type: object
-      required:
-      - crate
       properties:
-        crate:
-          $ref: '#/components/schemas/CrateSummary'
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Version'
-        keywords:
-          type: array
-          items:
-            $ref: '#/components/schemas/Keyword'
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
+        id:
+          type: string
+        keyword:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        crates_cnt:
+          type: integer
+    PublishResponse:
+      type: object
+      properties:
+        warnings:
+          type: object
+          properties:
+            invalid_categories:
+              type: array
+              items:
+                type: string
+            invalid_badges:
+              type: array
+              items:
+                type: string
+            other:
+              type: array
+              items:
+                type: string
   responses:
     Error:
       description: Error envelope returned by the crates.io API.
@@ -308,14 +316,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    CrateName:
-      name: crate
-      in: path
-      required: true
-      description: The crate name (e.g. serde, tokio, rand).
-      schema:
-        type: string
   securitySchemes:
     ApiTokenAuth:
       type: apiKey

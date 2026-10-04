@@ -99,7 +99,29 @@ paths:
         '403':
           $ref: '#/components/responses/Error'
 components:
+  parameters:
+    Version:
+      name: version
+      in: path
+      required: true
+      description: The semver version of the crate (e.g. 1.0.0).
+      schema:
+        type: string
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
   schemas:
+    OkResponse:
+      type: object
+      required:
+      - ok
+      properties:
+        ok:
+          type: boolean
     Version:
       type: object
       required:
@@ -159,13 +181,6 @@ components:
             properties:
               detail:
                 type: string
-    OkResponse:
-      type: object
-      required:
-      - ok
-      properties:
-        ok:
-          type: boolean
   responses:
     Error:
       description: Error envelope returned by the crates.io API.
@@ -173,21 +188,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    CrateName:
-      name: crate
-      in: path
-      required: true
-      description: The crate name (e.g. serde, tokio, rand).
-      schema:
-        type: string
-    Version:
-      name: version
-      in: path
-      required: true
-      description: The semver version of the crate (e.g. 1.0.0).
-      schema:
-        type: string
   securitySchemes:
     ApiTokenAuth:
       type: apiKey
