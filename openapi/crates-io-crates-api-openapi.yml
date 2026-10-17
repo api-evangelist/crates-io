@@ -118,97 +118,7 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
 components:
-  parameters:
-    CrateName:
-      name: crate
-      in: path
-      required: true
-      description: The crate name (e.g. serde, tokio, rand).
-      schema:
-        type: string
   schemas:
-    SearchMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        next_page:
-          type: string
-          nullable: true
-        prev_page:
-          type: string
-          nullable: true
-    Version:
-      type: object
-      required:
-      - num
-      - crate
-      properties:
-        id:
-          type: integer
-        crate:
-          type: string
-        num:
-          type: string
-        dl_path:
-          type: string
-        readme_path:
-          type: string
-        updated_at:
-          type: string
-          format: date-time
-        created_at:
-          type: string
-          format: date-time
-        downloads:
-          type: integer
-        features:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        yanked:
-          type: boolean
-        license:
-          type: string
-        rust_version:
-          type: string
-          nullable: true
-        crate_size:
-          type: integer
-          nullable: true
-    CrateDetailResponse:
-      type: object
-      required:
-      - crate
-      properties:
-        crate:
-          $ref: '#/components/schemas/CrateSummary'
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Version'
-        keywords:
-          type: array
-          items:
-            $ref: '#/components/schemas/Keyword'
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
-    CrateSearchResponse:
-      type: object
-      required:
-      - crates
-      - meta
-      properties:
-        crates:
-          type: array
-          items:
-            $ref: '#/components/schemas/CrateSummary'
-        meta:
-          $ref: '#/components/schemas/SearchMeta'
     CrateSummary:
       type: object
       required:
@@ -279,6 +189,69 @@ components:
             properties:
               detail:
                 type: string
+    SearchMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        next_page:
+          type: string
+          nullable: true
+        prev_page:
+          type: string
+          nullable: true
+    CrateSearchResponse:
+      type: object
+      required:
+      - crates
+      - meta
+      properties:
+        crates:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrateSummary'
+        meta:
+          $ref: '#/components/schemas/SearchMeta'
+    Version:
+      type: object
+      required:
+      - num
+      - crate
+      properties:
+        id:
+          type: integer
+        crate:
+          type: string
+        num:
+          type: string
+        dl_path:
+          type: string
+        readme_path:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        downloads:
+          type: integer
+        features:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        yanked:
+          type: boolean
+        license:
+          type: string
+        rust_version:
+          type: string
+          nullable: true
+        crate_size:
+          type: integer
+          nullable: true
     Keyword:
       type: object
       properties:
@@ -291,6 +264,25 @@ components:
           format: date-time
         crates_cnt:
           type: integer
+    CrateDetailResponse:
+      type: object
+      required:
+      - crate
+      properties:
+        crate:
+          $ref: '#/components/schemas/CrateSummary'
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Version'
+        keywords:
+          type: array
+          items:
+            $ref: '#/components/schemas/Keyword'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
     PublishResponse:
       type: object
       properties:
@@ -309,6 +301,14 @@ components:
               type: array
               items:
                 type: string
+  parameters:
+    CrateName:
+      name: crate
+      in: path
+      required: true
+      description: The crate name (e.g. serde, tokio, rand).
+      schema:
+        type: string
   responses:
     Error:
       description: Error envelope returned by the crates.io API.

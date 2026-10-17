@@ -115,13 +115,25 @@ components:
       schema:
         type: string
   schemas:
-    OkResponse:
+    ErrorResponse:
       type: object
       required:
-      - ok
+      - errors
       properties:
-        ok:
-          type: boolean
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              detail:
+                type: string
+    VersionDetailResponse:
+      type: object
+      required:
+      - version
+      properties:
+        version:
+          $ref: '#/components/schemas/Version'
     Version:
       type: object
       required:
@@ -162,25 +174,13 @@ components:
         crate_size:
           type: integer
           nullable: true
-    VersionDetailResponse:
+    OkResponse:
       type: object
       required:
-      - version
+      - ok
       properties:
-        version:
-          $ref: '#/components/schemas/Version'
-    ErrorResponse:
-      type: object
-      required:
-      - errors
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              detail:
-                type: string
+        ok:
+          type: boolean
   responses:
     Error:
       description: Error envelope returned by the crates.io API.
