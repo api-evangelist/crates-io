@@ -1,30 +1,46 @@
 {
   "provider": "crates-io",
   "sources": [
-    "_original/crates-io-sparse-index-openapi.yml",
-    "_original/crates-io-web-api-openapi.yml"
+    "_original/crates-io-openapi.json",
+    "_original/crates-io-sparse-index-openapi.yml"
   ],
   "outputs": [
-    "crates-io-config-api-openapi.yml",
-    "crates-io-index-api-openapi.yml",
+    "crates-io-api-tokens-api-openapi.yml",
+    "crates-io-categories-api-openapi.yml",
     "crates-io-crates-api-openapi.yml",
+    "crates-io-keywords-api-openapi.yml",
+    "crates-io-other-api-openapi.yml",
     "crates-io-owners-api-openapi.yml",
-    "crates-io-versions-api-openapi.yml"
+    "crates-io-publish-api-openapi.yml",
+    "crates-io-teams-api-openapi.yml",
+    "crates-io-trusted-publishing-api-openapi.yml",
+    "crates-io-users-api-openapi.yml",
+    "crates-io-versions-api-openapi.yml",
+    "crates-io-config-api-openapi.yml",
+    "crates-io-index-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "crates-io-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "crates-io-openapi.json: declared missing tag: api_tokens",
+    "crates-io-openapi.json: declared missing tag: categories",
+    "crates-io-openapi.json: declared missing tag: crates",
+    "crates-io-openapi.json: declared missing tag: keywords",
+    "crates-io-openapi.json: declared missing tag: other",
+    "crates-io-openapi.json: declared missing tag: owners",
+    "crates-io-openapi.json: declared missing tag: publish",
+    "crates-io-openapi.json: declared missing tag: teams",
+    "crates-io-openapi.json: declared missing tag: trusted_publishing",
+    "crates-io-openapi.json: declared missing tag: users",
+    "crates-io-openapi.json: declared missing tag: versions",
     "crates-io-sparse-index-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "crates-io-web-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+8 apis, 13 total)"
   ],
   "skipped": [
     "crates-io-config-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "crates-io-crates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "crates-io-index-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "crates-io-owners-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "crates-io-versions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "crates-io-index-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
