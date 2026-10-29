@@ -1,4 +1,4 @@
-# crates.io (crates-io)
+# crates.io
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,120 +66,116 @@
 
 crates.io is the official package registry for the Rust programming language, operated by the crates.io team under the Rust Foundation with infrastructure support from Amazon Web Services and Fastly. It exposes a Web API at /api/v1 used by Cargo and the website for search, publishing, yanking, and owner management, plus a sparse HTTP index at index.crates.io that has been Cargo's default registry protocol since Rust 1.70 (June 2023). The legacy git index is still mirrored. Every published version is checksummed with SHA-256 and companion documentation is auto-built on docs.rs. The crates.io source code is dual-licensed under Apache-2.0 and MIT and runs on Rust (axum, diesel) with a SvelteKit frontend.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/crates-io/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/crates-io/refs/heads/main/apis.yml)
+**Areas:** Rust · Package Registry · Crates · Cargo · Open Source · Developer Tools · Rust Foundation
 
-## Scope
+## crates.io on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for crates.io is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/crates-io/](https://apis.io/providers/crates-io/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-- Rust
-- Package Registry
-- Crates
-- Cargo
-- Open Source
-- Developer Tools
-- Rust Foundation
+- [crates.io Config API](https://apis.io/apis/crates-io/crates-io-config-api/) — Registry configuration document
+- [crates.io Crates API](https://apis.io/apis/crates-io/crates-io-crates-api/) — Search and manage Rust crates
+- [crates.io Index API](https://apis.io/apis/crates-io/crates-io-index-api/) — Per-crate index metadata files served over HTTP
+- [crates.io Owners API](https://apis.io/apis/crates-io/crates-io-owners-api/) — List, add, and remove crate owners
+- [crates.io Versions API](https://apis.io/apis/crates-io/crates-io-versions-api/) — Yank and unyank crate versions
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25T00:00:00.000Z
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### crates.io Web API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The crates.io Web API exposes the endpoints used by Cargo and the crates.io website to search the registry, fetch crate and version metadata, publish new versions, yank and unyank versions, and manage crate ownership. Hosted at https://crates.io/api/v1, it is the canonical implementation of the Cargo Registry Web API specification documented in the Cargo book.
+- [Crates Io Agentic Access](https://apis.io/agentic-access/crates-io/crates-io-agentic-access/)
 
-- **Human URL:** [https://doc.rust-lang.org/cargo/reference/registry-web-api.html](https://doc.rust-lang.org/cargo/reference/registry-web-api.html)
+#### JSON Schema (2)
 
-#### Tags
+The data models the API reads and writes.
 
-- Crates
-- Package Registry
-- Rust
-- Search
-- Publishing
+- [crates.io Crate](https://apis.io/schemas/crates-io/crates-io-crate/)
+- [crates.io Sparse Index Entry](https://apis.io/schemas/crates-io/crates-io-index-entry/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://doc.rust-lang.org/cargo/reference/registry-web-api.html)
-- [OpenAPI](openapi/crates-io-web-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/crates-io-web-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/crates-io-web-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/crates-io-crate-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/crates-io-crate-structure.json)
-- [JSON-LD](json-ld/crates-io-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/crates-io-rules.yml)
-- [Example](examples/crates-io-search-example.json)
-- [Example](examples/crates-io-get-crate-example.json)
+Data models expressed in JSON Structure.
 
-### crates.io Sparse Index
+- [Crates Io Crate Structure](https://apis.io/json-structure/crates-io/crates-io-crate-structure/)
 
-The crates.io sparse index at https://index.crates.io serves the registry config document plus per-crate newline-delimited JSON metadata files over HTTP, replacing the legacy git index clone. Cargo uses the sparse protocol by default since Rust 1.70 (June 2023). Each index entry records a version's dependencies, features, SHA-256 checksum, and yank state.
+#### JSON-LD (1)
 
-- **Human URL:** [https://doc.rust-lang.org/cargo/reference/registry-index.html](https://doc.rust-lang.org/cargo/reference/registry-index.html)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Crates Io Context](https://apis.io/jsonld/crates-io/crates-io-context/)
 
-- Index
-- Package Registry
-- Rust
-- Sparse Protocol
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://doc.rust-lang.org/cargo/reference/registry-index.html)
-- [Documentation](https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html)
-- [OpenAPI](openapi/crates-io-sparse-index-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/crates-io-sparse-index.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/crates-io-sparse-index.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/crates-io-index-entry-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Example](examples/crates-io-config-example.json)
-- [Example](examples/crates-io-sparse-index-example.json)
+- [crates.io Vocabulary](https://apis.io/vocabularies/crates-io/crates-io-vocabulary/)
 
-## Common Properties
+#### Examples (4)
 
-- [Portal](https://crates.io)
+Example requests and responses.
+
+- [Crates Io Config Example](https://apis.io/examples/crates-io/crates-io-config-example/)
+- [Crates Io Get Crate Example](https://apis.io/examples/crates-io/crates-io-get-crate-example/)
+- [Crates Io Search Example](https://apis.io/examples/crates-io/crates-io-search-example/)
+- [Crates Io Sparse Index Example](https://apis.io/examples/crates-io/crates-io-sparse-index-example/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [crates.io Sparse Index Config API](https://apis.io/collections/crates-io/open-crates-io-config-api/)
+- [.io Sparse Index Config Crates API](https://apis.io/collections/crates-io/open-crates-io-crates-api/)
+- [crates.io Sparse Config Index API](https://apis.io/collections/crates-io/open-crates-io-index-api/)
+- [crates.io Sparse Index Config Owners API](https://apis.io/collections/crates-io/open-crates-io-owners-api/)
+- [crates.io Sparse Index API](https://apis.io/collections/crates-io/open-crates-io-sparse-index/)
+- [crates.io Sparse Index Config Versions API](https://apis.io/collections/crates-io/open-crates-io-versions-api/)
+- [crates.io Web API](https://apis.io/collections/crates-io/open-crates-io-web-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [crates.io — jsonschema rules](https://apis.io/rules/crates-io/crates-io-jsonschema-spectral-rules/)
+- [crates.io API Rules](https://apis.io/rules/crates-io/crates-io-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Crates Io Authentication](https://apis.io/security/crates-io/crates-io-authentication/)
+- [Crates Io Domain Security](https://apis.io/security/crates-io/crates-io-domain-security/)
+- [Crates Io Vulnerability Disclosure](https://apis.io/security/crates-io/crates-io-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Documentation](https://doc.rust-lang.org/cargo/)
-- [Documentation](https://doc.rust-lang.org/cargo/reference/registry-web-api.html)
-- [Documentation](https://doc.rust-lang.org/cargo/reference/registry-index.html)
-- [Documentation](https://doc.rust-lang.org/cargo/reference/registries.html)
-- [Documentation](https://doc.rust-lang.org/cargo/reference/registry-authentication.html)
-- [Getting Started](https://doc.rust-lang.org/cargo/reference/publishing.html)
-- [GitHub Organization](https://github.com/rust-lang/crates.io)
-- [Source Code](https://github.com/rust-lang/crates.io-index)
-- [Source Code](https://github.com/rust-lang/crates.io-index-archive)
-- [Source Code](https://github.com/rust-lang/cargo)
-- [Tool](https://github.com/rust-lang/crates-io-auth-action)
-- [GitHub Organization](https://github.com/rust-lang/crates-io-cargo-teams)
-- [Tool](https://github.com/rust-lang/crates-io-ops-bot)
-- [Tool](https://github.com/rust-lang/crates_io_og_image)
-- [Tool](https://github.com/rust-lang/crates-io-heroku-metrics)
-- [Status Page](https://status.crates.io/)
-- [Blog](https://blog.rust-lang.org/inside-rust/)
+- [Getting started](https://doc.rust-lang.org/cargo/reference/publishing.html)
 - [Changelog](https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html)
-- [Documentation](https://github.com/rust-lang/crates.io/blob/main/CONTRIBUTING.md)
-- [Security Policy](https://github.com/rust-lang/crates.io/blob/main/SECURITY.md)
-- [Code Of Conduct](https://github.com/rust-lang/crates.io/blob/main/CODE_OF_CONDUCT.md)
-- [License](https://github.com/rust-lang/crates.io/blob/main/LICENSE-APACHE)
-- [License](https://github.com/rust-lang/crates.io/blob/main/LICENSE-MIT)
-- [Support](mailto:help@crates.io)
-- [Forum](https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io)
-- [Forum](https://github.com/rust-lang/crates.io/discussions)
-- [Documentation](https://crates.io/policies)
-- [Documentation](https://crates.io/data-access)
-- [Documentation](https://docs.rs)
-- [Sponsor](https://foundation.rust-lang.org/)
-- [Sponsor](https://aws.amazon.com/)
-- [Sponsor](https://www.fastly.com/)
-- [Features](undefined)
+- [Blog](https://blog.rust-lang.org/inside-rust/)
+- [GitHub](https://github.com/rust-lang/crates.io)
+- [Status](https://status.crates.io/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Unrated** — no public website could be reached for this company, so there was almost nothing to measure and nothing a reader could check.
+
+This is not a score of zero. No rating is published for this company. If that is wrong because something public exists that we missed, say so on this repository or email [info@apievangelist.com](mailto:info@apievangelist.com) and it will be re-run — free, and no justification needed.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for crates.io: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/crates-io/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
